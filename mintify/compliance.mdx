@@ -1,0 +1,134 @@
+FinTra handles sensitive financial behavior data. While the product is currently in MVP stage, we follow core industry standards to ensure user safety, data protection, and compliance readiness for future regulatory requirements.
+
+This page outlines the compliance foundation as well as the roadmap toward full fintech-grade compliance.
+
+## 1. Data Protection Compliance
+
+### 📌 Indian IT & Data Protection Standards (Current Focus)
+
+FinTra aligns with the key principles of:
+
+- Digital Personal Data Protection Act (DPDPA) 2023
+- IT Act, 2000 & IT Rules
+- RBI Guidelines for Customer Protection (where applicable)
+
+### How FinTra Complies:
+
+- Collects minimal personal data
+- Does not store bank credentials, UPI PINs, or OTPs
+- Stores sensitive data (passwords, tokens) in hashed form
+- Uses encrypted connections (TLS 1.2+) for all communication
+- Gives users full control over their data (export/delete coming soon)
+- Clear purpose limitation: only finance tracking, nothing else
+
+## 2. Global Compliance Readiness
+
+FinTra is engineered with a future global rollout in mind. Current architecture allows progressive alignment with:
+
+### 🛡 GDPR (EU) — Planned
+- Right to access / delete data
+- Explicit consent-based data use
+- No unnecessary retention
+
+### 🔐 CCPA (California) — Planned
+- Transparent data usage
+- Opt-out capabilities
+- No selling/sharing personal data
+
+### 🌍 International Privacy Practices — Planned
+- Data minimization
+- Purpose limitation
+- Safe data transfers
+
+These will be implemented as FinTra expands beyond India.
+
+## 3. Security Framework Alignment
+
+While the MVP is not yet fully certified, FinTra follows structural elements of major security frameworks:
+
+### SOC 2 (Trust Services Criteria)
+We currently align with:
+- Security
+- Confidentiality
+- Availability
+
+### ISO 27001 (Information Security Management)
+Aligned practices include:
+- Controlled access
+- Risk management
+- Secure software development
+- Data encryption
+
+### OWASP Mobile Application Security
+FinTra follows:
+- Secure storage
+- Secure communication
+- Input validation
+- No hardcoded secrets
+
+These frameworks guide our internal design — formal certification will follow as the product grows.
+
+## 4. Compliance Boundaries (Important)
+
+FinTra is not a financial institution and does not:
+- Provide loans
+- Store bank credentials
+- Enable transactions
+- Handle KYC/AML flows
+
+This avoids heavy regulatory burdens while building the core product.
+
+## 5. Data Retention & Deletion Policy
+
+### Retention
+- Minimal personally identifiable data
+- All financial entries owned by the user
+- Logs and analytics stored only for debugging and performance
+
+### Deletion
+- Users can request manual deletion (automated in Phase 2)
+- Offboarding = permanent removal from database
+- No shadow retention
+
+## 6. User Consent & Transparency
+
+FinTra maintains:
+- Simple terms of use
+- Clear consent for data usage
+- No third-party sharing of data
+- No ad-based monetization
+
+Everything collected is for the user's financial clarity only.
+
+## 7. Compliance Roadmap
+
+### Phase 1 (MVP) — Done
+- HTTPS enforced
+- RLS + DB access controls
+- Basic privacy policy
+- Secure authentication
+- Data minimization
+
+### Phase 2 — In Progress
+- Automated data deletion flow
+- Advanced encrypted local vault
+- Device-based session fingerprinting
+- Audit logs & security events
+
+### Phase 3 — Scaling
+- GDPR-ready modifications
+- SOC 2 internal controls
+- ISO 27001 certification
+- Dedicated compliance automation
+
+## Summary
+
+FinTra's compliance strategy is built on:
+- Minimal data storage
+- Strong privacy principles
+- Encryption + secure architecture
+- RLS-based data isolation
+- Alignment with global standards
+- Future-ready compliance roadmap
+
+As the platform grows, compliance will move from aligned practices → formal certifications → enterprise-grade readiness.

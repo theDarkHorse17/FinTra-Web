@@ -1,0 +1,26 @@
+## Table: users
+- id
+- name
+- email
+- phone
+- created_at
+
+## Table: monthly
+- id
+- userid
+- monthKey
+- salary
+- savings
+- updated_at
+
+## Table: expenses
+- id
+- userid
+- amount
+- category
+- monthKey
+- created_at
+
+Indexes:
+- idx_user_month
+- idx_expense_category

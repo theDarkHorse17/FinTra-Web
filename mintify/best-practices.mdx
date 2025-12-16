@@ -1,0 +1,153 @@
+This page outlines recommended practices for developing, maintaining, and scaling FinTra. These guidelines help ensure code quality, security, performance, and consistency across the project as more contributors join.
+
+## 1. Code Structure & Organization
+
+### Use Clear Directory Structure
+- Follow feature-based grouping in Flutter
+- Keep reusable components in shared folders
+- Maintain a clean separation between UI, logic, and data layers
+
+### Avoid "God Classes"
+Break large widgets or services into smaller, focused parts. Each file should have a single responsibility.
+
+### Consistent Naming
+- `camelCase` for functions and variables
+- `PascalCase` for widgets and classes
+- `snake_case` for file names
+
+## 2. State Management Practices
+
+- Keep UI code simple
+- Move business logic to controllers/services
+- Avoid deeply nested widget trees
+- Prefer app-wide providers for global state
+- Use immutable models wherever possible
+
+## 3. API & Database Practices
+
+### Validation First
+- Validate ALL inputs before writing to database
+
+### No Direct DB Logic in UI
+- Use service classes or repositories
+- Keep DB calls centralized
+- Avoid inline queries inside widgets
+
+### Use Row Level Security (RLS)
+- Ensure all tables have strict access control policies
+
+## 4. Authentication Best Practices
+
+- Never store tokens in plain text
+- Always hash passwords
+- Use short-lived auth tokens
+- Refresh tokens only in secure flows
+- Logout on suspicious behavior
+
+## 5. Performance Best Practices
+
+### Optimize Widget Builds
+- Avoid expensive operations in build()
+- Use const constructors whenever possible
+- Use memoization for repeated calculations
+
+### Reduce Rebuilds
+- Split UI into smaller components
+- Use selectors/lazy builders
+
+### Lazy Loading
+- Load large datasets only when needed
+
+## 6. Security Best Practices
+
+### Never Hardcode Secrets
+- Use `.env` files or build-time variables
+
+### Sanitize All Inputs
+- Prevent SQL injection through server-side validation
+
+### Encrypt Sensitive Data
+- Use HTTPS only
+- Encrypt local storage when possible
+
+### Regular Security Audits
+Run tools like:
+- Snyk
+- Flutter secure lint
+- Supabase policy review
+
+## 7. Release & Deployment Best Practices
+
+### Use Build Variants
+- `debug` for development
+- `release` for testers
+- `profile` for performance benchmarking
+
+### Run Tests Before Releases
+- Unit tests
+- Integration tests
+- Manual testing on real device
+
+### Minify & Obfuscate Release Builds
+```bash
+flutter build apk --release --obfuscate --split-debug-info=build/debug
+```
+
+### Tag Every Release
+Use semantic versioning:
+- `v1.0.0` (Major.Minor.Patch)
+- `v1.1.0` (Feature addition)
+- `v1.1.1` (Bug fix)
+
+## 8. Logging & Debugging Practices
+
+### Use Debug Logs Wisely
+- Avoid log spam
+- Remove debug prints in release builds
+
+### Crash Reporting
+*(Phase 2)*
+Use Sentry or Firebase Crashlytics to monitor production issues.
+
+### Clear Error Messages
+Provide actionable error messages for users and developers.
+
+## 9. Documentation Practices
+
+- Update docs after major changes
+- Add architecture diagrams when code evolves
+- Keep API docs clean and simple
+- Maintain a changelog for testers
+
+Documentation should always be:
+- ✅ Accurate
+- ✅ Minimal
+- ✅ Up-to-date
+
+## 10. Collaboration & Version Control
+
+### Git Workflow
+- Always create feature branches
+- Commit small, meaningful changes
+- Write clear commit messages
+- Review changes before merging
+
+### Sample Commit Message Format
+```
+feat: add savings analysis widget
+fix: correct monthKey calculation bug
+refactor: extracted expense service
+docs: updated build guide
+```
+
+### Avoid Pushing Large Files
+- Use Git LFS only when necessary
+
+## Summary
+
+FinTra development follows a simple rule:
+
+> **Fast to build. Easy to maintain. Secure to scale.**
+
+These best practices help keep the codebase clean, efficient, and ready for future contributors.
+```

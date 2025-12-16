@@ -1,0 +1,208 @@
+---
+title: Testing Guide
+description: Comprehensive guide for testing the FinTra application
+---
+
+# Testing Guide
+
+This page explains how to test the FinTra application across devices, builds, and environments. It covers manual testing, automated testing (future), debugging steps, and guidelines for internal testers.
+
+## 1. Testing Overview
+
+FinTra is currently in **MVP stage**, so testing focuses primarily on:
+
+- App stability
+- Expense logging accuracy
+- UI/UX consistency
+- Month-key calculations
+- Database correctness
+- Crash-free navigation
+- Edge-case handling
+
+Testing ensures every user action behaves predictably and securely.
+
+## 2. Types of Testing
+
+### Manual Testing (Current Focus)
+All testers validate:
+- UI flows
+- Expense addition
+- Savings updates
+- Category-level breakdown
+- Login & logout
+- Month switching
+- Overview calculations
+
+### Automated Testing (Phase 2)
+Planned for future:
+- Unit tests
+- Integration tests
+- Widget tests
+
+## 3. Test Environment Setup
+
+### Install APK
+Download the latest internal build:
+
+👉 **[Download FinTra APK](https://fintrahq.com/)**
+
+
+### Enable Developer Mode (If needed)
+1. Go to **Settings → About Phone**
+2. Tap **Build Number** 7 times
+3. Enable **Install Unknown Apps**
+
+### Install the App
+Tap the APK → Install.
+
+## 4. Core Test Scenarios
+
+### A) Authentication
+- Login with valid credentials
+- Login with invalid credentials
+- Logout flow
+- Session persistence after app restart
+
+### B) Expense Management
+- Add expense in each category
+- Add two quick expenses in a row
+- Add large expenses (₹1–2 lakh)
+- Verify correct total updates
+- Verify correct "Left to spend" value
+
+### C) Savings Engine
+- Add savings
+- Remove savings
+- Update monthly blueprint
+- Check if ring charts update instantly
+
+### D) Overview Page
+Check all components:
+- Total spent
+- Total saved
+- Line chart current vs last month
+- Category-wise ring chart
+- Month switching
+
+### E) App Navigation
+- Move between tabs
+- Open/close dialogs
+- Navigate back multiple times
+- Test on slow device
+
+### F) Error Handling
+- Adding empty values
+- Invalid characters
+- Network disconnected mode
+- Rapid taps
+
+## 5. Device Testing Matrix
+
+### Recommended devices for testing
+
+| Device Type | Example Models | Why Test Here |
+|-------------|----------------|---------------|
+| Low-end | Redmi 7, Vivo Y Series | slow CPU, UI lag detection |
+| Mid-range | Samsung A/M Series | general behavioral testing |
+| High-end | Pixel / OnePlus | animation consistency |
+| Tablet (optional) | Samsung Tab | future responsive planning |
+
+## 6. Bug Reporting Process
+
+When reporting a bug, include:
+
+### 1. Steps to reproduce
+Clear step-by-step actions.
+
+### 2. Expected result
+What should happen.
+
+### 3. Actual result
+What actually happened.
+
+### 4. Device details
+- Device model
+- Android version
+- App version
+
+### 5. Screenshot / Screen recording
+Very helpful for debugging.
+
+**Example:**
+```
+Bug Title: Wrong savings calculation after adding new expense
+Device: Xiaomi Redmi 9
+Android: 13
+Steps:
+1. Add expense of ₹500 in Health
+2. Savings becomes negative
+Expected: Savings should not change
+Actual: Savings becomes -₹500
+```
+
+## 7. Crash Testing
+
+Try to intentionally break the app:
+
+- Rapid tapping on buttons
+- Switching tabs continuously
+- Repeatedly adding/removing expenses
+- Opening dialogs and rotating the phone
+- Killing and reopening app quickly
+
+Any crash must be reported.
+
+## 8. Performance Testing
+
+Focus on:
+
+- Smooth scrolling
+- Zero jank in page transitions
+- Expense addition < 300ms
+- Savings updates < 200ms
+- Overview load time < 1 sec
+
+Use the Flutter Performance Overlay (optional).
+
+## 9. Pre-release Checklist
+
+Before pushing a new APK:
+
+- [ ] All pages load without errors
+- [ ] No crashes in navigation
+- [ ] Expenses update instantly
+- [ ] Overview shows correct month data
+- [ ] Savings updates correctly
+- [ ] No debug logs in release build
+- [ ] App icon + version updated
+- [ ] Obfuscation build tested
+
+## 10. Future Testing Roadmap
+
+### Phase 2
+- Unit tests for expense engine
+- Integration tests for authentication
+- Automated UI tests (Flutter driver)
+- Crashlytics integration
+
+### Phase 3
+- Load testing
+- Multi-device automated farms
+- Real user monitoring
+
+## Summary
+
+FinTra testing focuses on:
+
+> **Stability, accuracy, performance, and real-user behavior.**
+
+A clean, crash-free experience is the priority as we scale.
+
+---
+
+Would you like me to create any of these additional templates as well?
+- QA Report Template
+- Bug Report Template
+- Tester Onboarding Guide
+- Release Checklist
+```

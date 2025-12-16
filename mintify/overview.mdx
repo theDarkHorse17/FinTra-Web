@@ -1,0 +1,85 @@
+---
+title: API Overview
+description: FinTra API documentation and future architecture
+---
+
+# API Overview
+
+FinTra's API is designed for simplicity and scalability, starting with a lightweight MVP approach and evolving into a comprehensive platform.
+
+## Current Architecture (MVP)
+
+### Local Processing
+- Expense calculations
+- Category breakdowns
+- Savings tracking
+- Client-side validations
+
+### Supabase Integration
+- Direct database access
+- Authentication
+- Row-level security
+- Real-time updates
+
+## Future API Structure
+
+### Core Endpoints (Phase 2+)
+
+#### AI Services
+```http
+POST /ai/advice
+POST /ai/monthly-projection
+```
+
+#### Blueprint Management
+```http
+POST /blueprint/generate
+POST /blueprint/adjust
+```
+
+#### Expense Processing
+```http
+POST /expense/tag
+POST /expense/auto-categorize
+```
+
+## Future Vision
+
+### Planned Endpoints
+- `/analytics/spending-patterns`
+- `/goals/recommendations`
+- `/investments/pnl`
+- `/sync/multi-device`
+
+### Key Features
+- RESTful design
+- Webhook support
+- Rate limiting
+- API versioning
+- Comprehensive documentation
+
+## Getting Started
+
+### Authentication
+```http
+POST /auth/login
+Content-Type: application/json
+
+{
+  "email": "user@example.com",
+  "password": "securepassword"
+}
+```
+
+### Rate Limits
+- 100 requests/minute per IP
+- 1000 requests/minute per authenticated user
+
+## Next Steps
+
+- [ ] API Reference
+- [ ] Authentication Guide
+- [ ] Webhook Documentation
+- [ ] Integration Examples
+
+*Need more details on any endpoint? Let us know!*

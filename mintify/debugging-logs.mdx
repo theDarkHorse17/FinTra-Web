@@ -1,0 +1,125 @@
+---
+title: Debugging & Logs
+description: Guide to debugging FinTra, handling logs, and troubleshooting issues
+---
+
+# Debugging & Logs
+
+This page explains how to debug FinTra during development, handle logs, and collect information when issues arise.
+
+## 1. Overview
+
+FinTra uses Flutter's built-in debugging tools and structured logging to help identify:
+- App crashes
+- UI rendering issues
+- State inconsistencies
+- Database errors
+- Performance bottlenecks
+
+## 2. Enabling Debug Logs
+
+View logs in the terminal with:
+
+```bash
+flutter run
+```
+
+### What's Logged:
+- UI lifecycle events
+- Errors & stack traces
+- Supabase query responses
+- Widget rebuilds (if enabled)
+
+### Best Practices:
+- Use `debugPrint("message")` instead of `print()`
+- Avoid logging in large loops
+- Keep logs concise and meaningful
+
+## 3. Debugging Database Issues
+
+### Logging Queries:
+```dart
+final response = await client.from('expenses').insert(data);
+if (response.error != null) {
+  debugPrint("DB Error: ${response.error!.message}");
+}
+```
+
+### Common Issues:
+- Incorrect `monthKey` format
+- Missing `userId`
+- Row Level Security (RLS) restrictions
+- Network timeouts
+
+## 4. Performance Debugging
+
+### Enable Performance Overlay
+In `main.dart`:
+```dart
+WidgetsApp.showPerformanceOverlayOverride = true;
+```
+
+### Using DevTools:
+```bash
+flutter pub global activate devtools
+devtools
+```
+
+## 5. Common Scenarios
+
+### Expenses Not Updating
+- Verify write operation success
+- Check `monthKey` format
+- Confirm state updates trigger UI refresh
+
+### App Freezes
+- Look for heavy operations in `build()`
+- Check for missing `await` keywords
+- Monitor for infinite loops
+
+## 6. Best Practices
+
+### Do:
+- Keep logs short and meaningful
+- Log before/after key operations
+- Use structured debug messages
+- Remove sensitive data from logs
+
+### Don't:
+- Commit debug logs to production
+- Log sensitive information
+- Overload logs with unnecessary details
+
+## 7. Device Logs
+
+### Android:
+```bash
+adb logcat | grep flutter
+```
+
+### iOS:
+```bash
+xcrun simctl spawn booted log show --predicate 'process == "FinTra"'
+```
+
+## 8. Release Builds
+
+Remove all debug logs before release:
+```dart
+if (kDebugMode) {
+  debugPrint("Debug only log");
+}
+```
+
+## 9. Next Steps
+
+Need more specific debugging guides? Let me know if you'd like help with:
+- Error codes reference
+- Debugging checklist
+- Flutter DevTools guide
+- Supabase query debugging
+
+---
+
+*Remember: Good logging saves hours of debugging time.*
+```

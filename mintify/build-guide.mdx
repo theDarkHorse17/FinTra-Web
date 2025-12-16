@@ -1,0 +1,197 @@
+This guide explains how to build, package, and distribute the FinTra application for local testing, internal releases, and production-ready APKs.
+
+---
+
+## **1. Prerequisites**
+
+Before building FinTra, install the following:
+
+### **Required**
+
+* Flutter SDK (Stable Channel)
+* Android Studio (with Android SDK + Build Tools)
+* Java Development Kit (JDK 11 or above)
+* Git
+
+### **Verify Your Environment**
+
+```bash
+flutter doctor
+```
+
+---
+
+## **2. Clone the Repository (Private)**
+
+FinTra’s repository is private. Authorized users can clone it:
+
+```bash
+git clone <your-private-repo-url>
+cd FinTra
+```
+
+Update to the latest version:
+
+```bash
+git pull
+```
+
+---
+
+## **3. Install Dependencies**
+
+Run:
+
+```bash
+flutter pub get
+```
+
+This installs all Flutter packages required by the project.
+
+---
+
+## **4. Build Types**
+
+You can generate **Debug**, **Profile**, or **Release** builds depending on your needs.
+
+---
+
+### **A) Debug Build (Local Development)**
+
+```bash
+flutter build apk
+```
+
+Output:
+
+```
+build/app/outputs/flutter-apk/app-debug.apk
+```
+
+Debug builds include:
+
+* Debug banner
+* Logs enabled
+* Fast iteration
+
+---
+
+### **B) Profile Build (Performance Testing)**
+
+```bash
+flutter build apk --profile
+```
+
+Useful for animation/performance benchmarking.
+
+---
+
+### **C) Release Build (For Internal Distribution)**
+
+```bash
+flutter build apk --release
+```
+
+Output:
+
+```
+build/app/outputs/apk/release/app-release.apk
+```
+
+Release builds are optimized and suitable for testers.
+
+---
+
+## **5. Signing the Release (Optional)**
+
+For internal APK distribution, signing is optional — Flutter generates an unsigned release that works on most devices.
+
+When you’re ready for Play Store deployment, you will need to:
+
+1. Generate a keystore
+2. Add `key.properties`
+3. Update `android/app/build.gradle`
+
+I can generate this guide if needed.
+
+---
+
+## **6. Download the Latest Build**
+
+The latest FinTra build is available here:
+
+👉 **[Download FinTra APK](https://fintrahq.com/)**
+
+---
+
+## **7. Common Build Issues & Fixes**
+
+### **Gradle Errors**
+
+```bash
+flutter clean
+flutter pub get
+```
+
+### **Java Version Issues**
+
+Ensure `JAVA_HOME` points to JDK 11 or JDK 17.
+
+### **Android SDK Missing**
+
+In Android Studio → **SDK Manager**:
+
+* Install latest Android SDK Platform
+* Install Android Build-tools
+* Install Platform Tools
+
+### **APK Not Installing**
+
+Enable on device:
+
+* Developer Options
+* USB Debugging
+* Install Unknown Apps
+
+---
+
+## **8. Running on a Physical Device**
+
+Check connected devices:
+
+```bash
+flutter devices
+```
+
+Run:
+
+```bash
+flutter run --release
+```
+
+Installs the optimized version directly.
+
+---
+
+## **9. Web Build (Optional)**
+
+```bash
+flutter build web
+```
+
+Output folder:
+
+```
+build/web
+```
+
+---
+
+## **Summary Table**
+
+| Build Type  | Command                       | Purpose                |
+| ----------- | ----------------------------- | ---------------------- |
+| **Debug**   | `flutter build apk`           | Developer debugging    |
+| **Profile** | `flutter build apk --profile` | Performance tests      |
+| **Release** | `flutter build apk --release` | Distribution / Testing |
+

@@ -1,0 +1,60 @@
+## Transaction Processing & State Management
+
+This section documents how FinTra processes user actions and maintains a consistent financial state within an active monthly cycle.
+
+---
+
+### Flow Overview
+
+FinTra follows an **event-driven state model**, where every user action results in a deterministic system update.
+
+---
+
+### Execution Flow
+
+#### 1. User Authentication
+- User successfully authenticates.
+- An active session is established.
+
+#### 2. Monthly Salary Snapshot Creation
+- On first login of a new cycle, the system initializes a `MonthlySnapshot`.
+- The snapshot stores:
+  - `salary_amount`
+  - `cycle_id`
+  - `cycle_start_date`
+  - baseline allocation metadata
+
+#### 3. Expense Ingestion
+- User submits an expense via manual entry.
+- Each expense is persisted with:
+  - `amount`
+  - `category_id`
+  - `timestamp`
+  - `user_id`
+  - `cycle_id`
+
+#### 4. Derived State Recalculation
+- Every expense write triggers a recalculation of derived metrics:
+  - `total_spent`
+  - `remaining_balance`
+  - `category_allocation_percentage`
+  - `savings_progress`
+
+#### 5. Real-Time UI Synchronization
+- UI components subscribe to derived state changes.
+- Graphs, rings, and summaries update instantly without manual refresh.
+
+---
+
+### Design Principle
+
+> All financial indicators in FinTra are **derived state**, recalculated on every transaction to guarantee accuracy and eliminate stale data.
+
+---
+
+### Guarantees
+
+- No cached financial values
+- Single source of truth per cycle
+- Deterministic updates on every write
+- Real-time visual consistency across the app

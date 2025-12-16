@@ -1,0 +1,207 @@
+Here is a **clear, professional, MDX-formatted Security Model** for FinTra — written exactly like a real SaaS documentation page, with clean sections, principles, data flow protection, and threat mitigation.
+
+Paste this into:
+
+```
+content/security/security-model.mdx
+```
+
+---
+
+# **Security Model**
+
+FinTra handles personal finance information for users.
+This Security Model outlines how data is stored, accessed, transmitted, and protected throughout the system.
+
+FinTra currently operates with a **lightweight yet robust security posture** appropriate for an MVP while laying the foundation for enterprise-grade security as the platform scales.
+
+---
+
+## **1. Security Principles**
+
+FinTra follows these core principles:
+
+### **🔐 1. Least Privilege**
+
+Every component (client, server, database) only accesses the minimum data required.
+
+### **🧱 2. Zero Trust Mindset**
+
+All requests must be authenticated and validated.
+No blind trust in client-side inputs.
+
+### **🛡 3. Defense in Depth**
+
+Multiple layers of checks:
+
+* Input validation
+* Row-level security
+* Token validation
+* Database permission boundaries
+
+### **📦 4. No Sensitive Logic on Frontend**
+
+Business-critical checks (limits, constraints, permissions) run on the backend or via database policies.
+
+---
+
+## **2. Authentication Security**
+
+### **FinTra uses a custom authentication system:**
+
+* Phone/email login
+* OTP or password-based
+* JWT token generation
+* Session expiry
+* Refresh-token model (Phase 2)
+
+### **Security Measures:**
+
+* Hashed passwords using bcrypt (no plain text storage)
+* Device-bound tokens (optional future enhancement)
+* Auto-expiry for inactive sessions
+* Suspicious login detection (Phase 2)
+
+---
+
+## **3. Data Storage Security**
+
+### **Database:** Supabase (PostgreSQL with RLS)
+
+All user-specific tables have:
+
+* **Row Level Security (RLS)** enabled
+* **Policies** enforcing:
+
+  * Users can read/write ONLY their own rows
+  * Admin tables require elevated permissions
+
+### **Sensitive fields are NEVER stored as plain text:**
+
+* Passwords → hashed (bcrypt)
+* Auth tokens → hashed or encrypted
+* Personal details → minimal storing, no unnecessary PII
+
+### **No financial credentials stored:**
+
+FinTra NEVER collects or stores:
+
+* Bank login credentials
+* Card numbers
+* UPI PINs
+* OTPs
+
+---
+
+## **4. API Security**
+
+All API endpoints enforce:
+
+* Token validation
+* User ID matching
+* Rate limiting (Phase 2)
+* CSRF-safe flows
+* Input sanitization
+
+### Incoming requests undergo:
+
+* Type checking
+* Length validation
+* SQL injection prevention
+* Malicious payload filtering
+
+---
+
+## **5. Frontend Security**
+
+### **Protection Mechanisms**
+
+* No sensitive logic executed on the client
+* No hardcoded secrets in Flutter code
+* Token stored only in secure local storage
+* HTTPS enforced for all traffic
+
+### **Weak areas (being upgraded):**
+
+* No pin lock screen (Phase 2)
+* No biometric unlock (Phase 2)
+
+---
+
+## **6. Communication Security**
+
+### All data transmission is:
+
+* End-to-end over HTTPS
+* Encrypted at rest (Supabase PostgreSQL AES-256)
+* Protected via TLS 1.2+
+
+No unencrypted HTTP is used anywhere.
+
+---
+
+## **7. Access Control Model**
+
+### Users:
+
+* Access only their expenses
+* Cannot modify other user’s data
+* Cannot access internal analytics
+
+### Developers (Internal):
+
+* Access control by role
+* Staging vs production DB separated
+* No production creds in code
+* Secrets stored via environment variables
+
+---
+
+## **8. Error Handling & Logging**
+
+* No sensitive data in error logs
+* Failed login attempts limited
+* Suspicious patterns flagged internally (Phase 2)
+* Crash logs anonymized
+
+---
+
+## **9. Threat Mitigation**
+
+| Threat                 | Mitigation                          |
+| ---------------------- | ----------------------------------- |
+| Brute-force login      | Login throttling (Phase 2)          |
+| SQL Injection          | Parameterized queries + RLS         |
+| Token Theft            | Short-lived tokens + secure storage |
+| Man-in-the-Middle      | Full HTTPS, TLS enforcement         |
+| Unauthorized DB access | RLS + policy-based access           |
+| App cloning            | Code obfuscation (Release builds)   |
+
+---
+
+## **10. Future Security Enhancements**
+
+* 🔐 **Biometric Lock (Fingerprint/FaceID)**
+* 🔐 **App-level PIN**
+* 🔐 **Encrypted local vault for offline mode**
+* 🛡 **Advanced OAuth integration**
+* 🛡 **Suspicious activity detection**
+* 📩 **Email alerts for risky behavior**
+* 🔒 **Device-based verification**
+* 🧪 **Automated security testing pipeline**
+
+---
+
+## **Summary**
+
+FinTra emphasizes:
+
+* Minimal data collection
+* Strict access control
+* End-to-end encryption
+* Secure authentication
+* Strong database policies
+
+This Security Model evolves as the app scales, ensuring users’ financial data remains protected.
+
+---

@@ -1,0 +1,134 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "FinTra Documentation",
+  "theme": "mint",
+  "root": "./docs",
+  "favicon": "logo.png",
+  "colors": {
+    "primary": "#16A34A",
+    "light": "#07C983",
+    "dark": "#15803D"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "🚀 Getting Started",
+            "pages": [
+              "introduction",
+              "vision"
+            ]
+          },
+          {
+            "group": "📊 Product",
+            "pages": [
+              "problem",
+              "solution",
+              "features",
+              "target-audience",
+              "behaviour-driven-finance"
+            ]
+          },
+          {
+            "group": "🏇🏻Roadmap",
+            "pages": [
+              "future-roadmap",
+              "asks"
+            ]
+          },
+          {
+            "group": "🔧 Technical",
+            "pages": [
+              "architecture",
+              "app-flow",
+              "auth-system",
+              "supabase-schema"
+            ]
+          },
+          {
+            "group": "💻 Development",
+            "pages": [
+              "setup",
+              "debugging-logs",
+              "testing",
+              "build-guide"
+            ]
+          },
+          {
+            "group": "🔒 Security",
+            "pages": [
+              "security-model",
+              "compliance",
+              "best-practices"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": ["overview"]
+          },
+          {
+            "group": "Authentication",
+            "pages": ["auth-system"]
+          }
+        ]
+      },
+      {
+        "tab": "Resources",
+        "groups": [
+          {
+            "group": "Team",
+            "pages": [
+              "founder",
+              "Stakeholder"
+            ]
+          },
+          {
+            "group": "Legal",
+            "pages": [
+              "terms",
+              "privacy",
+              "changelog"
+            ]
+          },
+          {
+            "group": "About",
+            "pages": [
+              "changelog"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "header": {
+  },
+  "footer": {
+    "text": "© 2025 FinTra. All rights reserved."
+  },
+  "features": {
+    "breadcrumbs": true,
+    "backToTop": true,
+    "search": {
+      "enabled": true,
+      "provider": "algolia"
+    },
+    "toc": {
+      "enabled": true,
+      "title": "On this page"
+    },
+    "editPage": {
+      "baseUrl": "https://github.com/yourusername/fintra/edit/main/docs/content"
+    },
+    "previousNext": {
+      "enabled": true,
+      "arrowNavigation": true
+    }
+  }
+}
