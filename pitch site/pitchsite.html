@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FinTra — Pitch Website</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0a0a0a;
+      --card1:#1a1a2e;
+      --card2:#16213e;
+      --accent1:#4facfe;
+      --accent2:#00f2fe;
+      --danger:#ff3b5c;
+      --text:rgba(255,255,255,0.92);
+      --muted:rgba(255,255,255,0.70);
+      --soft:rgba(255,255,255,0.55);
+      --hair:rgba(255,255,255,0.10);
+      --shadow:rgba(0,0,0,0.55);
+      --radius:20px;
+      --max:1200px;
+    }
+
+    *{ margin:0; padding:0; box-sizing:border-box; }
+
+    html, body { height: 100%; }
+
+    body{
+      font-family:'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x:hidden;
+    }
+
+    /* Layout */
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .topbar{
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: linear-gradient(to bottom, rgba(10,10,10,0.92), rgba(10,10,10,0.40), rgba(10,10,10,0));
+      backdrop-filter: blur(10px);
+      padding: 14px 0 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .topbar-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border: 1px solid rgba(79,172,254,0.22);
+      border-radius: 999px;
+      color: var(--soft);
+      font-size: 12px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      user-select:none;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .nav{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+
+    .nav a{
+      text-decoration:none;
+      color: rgba(255,255,255,0.65);
+      font-size: 13px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      transition: transform .2s ease, border-color .2s ease, color .2s ease;
+    }
+    .nav a:hover{
+      transform: translateY(-2px);
+      border-color: rgba(79,172,254,0.35);
+      color: rgba(255,255,255,0.88);
+    }
+
+    /* Section Cards */
+    section.card{
+      background: linear-gradient(135deg, var(--card1) 0%, var(--card2) 100%);
+      border-radius: var(--radius);
+      padding: 56px;
+      margin: 22px 0;
+      min-height: 520px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      box-shadow: 0 22px 70px var(--shadow);
+      position:relative;
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    section.card::before{
+      content:'';
+      position:absolute;
+      top:-120px;
+      right:-120px;
+      width: 460px;
+      height: 460px;
+      background: radial-gradient(circle, rgba(79,172,254,0.11) 0%, transparent 70%);
+      border-radius: 50%;
+      pointer-events:none;
+    }
+
+    .hero{ min-height: 88vh; }
+
+    .kicker{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.65);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: fit-content;
+      margin-bottom: 18px;
+    }
+
+    h1{
+      font-size: 58px;
+      font-weight: 800;
+      line-height: 1.12;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+    }
+
+    h2{
+      font-size: 38px;
+      font-weight: 800;
+      margin-bottom: 18px;
+      color: var(--accent1);
+      letter-spacing: -0.02em;
+    }
+
+    h3{
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--accent2);
+    }
+
+    .tagline{
+      font-size: 26px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.86);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .subtitle{
+      font-size: 18px;
+      color: var(--muted);
+      line-height: 1.65;
+      max-width: 78ch;
+    }
+
+    .soft{ color: var(--soft); }
+
+    .divider{
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(to right, transparent, rgba(79,172,254,0.35), transparent);
+      margin: 30px 0;
+      border: 0;
+    }
+
+    /* Boxes */
+    .problem-box{
+      background: rgba(255, 59, 92, 0.10);
+      border-left: 4px solid var(--danger);
+      padding: 22px;
+      margin: 18px 0;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 59, 92, 0.15);
+    }
+
+    .solution-box{
+      background: rgba(79, 172, 254, 0.10);
+      border-left: 4px solid var(--accent1);
+      padding: 22px;
+      margin: 18px 0;
+      border-radius: 12px;
+      border: 1px solid rgba(79, 172, 254, 0.18);
+    }
+
+    /* Lists */
+    .feature-list{
+      list-style:none;
+      margin-top: 18px;
+    }
+    .feature-list li{
+      padding: 16px 18px;
+      margin-bottom: 12px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 12px;
+      border-left: 3px solid rgba(79,172,254,0.80);
+      font-size: 16px;
+      line-height: 1.55;
+      color: rgba(255,255,255,0.82);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-right: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    /* Steps */
+    .step-container{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .step{
+      background: rgba(255,255,255,0.04);
+      padding: 22px;
+      border-radius: 14px;
+      border: 1px solid rgba(79,172,254,0.18);
+      transition: transform .22s ease, border-color .22s ease;
+    }
+    .step:hover{
+      transform: translateY(-4px);
+      border-color: rgba(79,172,254,0.45);
+    }
+    .step-number{
+      display:inline-grid;
+      place-items:center;
+      background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
+      color: #0a0a0a;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    /* Metrics */
+    .metric-grid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 22px;
+    }
+    .metric{
+      text-align:center;
+      padding: 22px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .metric-value{
+      font-size: 40px;
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+      background-clip:text;
+      margin-bottom: 6px;
+    }
+    .metric-label{
+      font-size: 13px;
+      color: rgba(255,255,255,0.55);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .highlight{
+      color: var(--accent1);
+      font-weight: 800;
+    }
+
+    /* CTA */
+    .cta-box{
+      background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
+      color: #0a0a0a;
+      padding: 28px;
+      border-radius: 16px;
+      text-align: left;
+      margin-top: 18px;
+      box-shadow: 0 16px 45px rgba(79,172,254,0.22);
+    }
+    .cta-box h3{
+      color: #0a0a0a;
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+    .cta-text{
+      font-size: 16px;
+      font-weight: 700;
+      color: rgba(10,10,10,0.82);
+      line-height: 1.55;
+    }
+
+    /* Footer */
+    footer{
+      padding: 30px 0 50px;
+      color: rgba(255,255,255,0.55);
+      text-align:center;
+      font-size: 13px;
+    }
+
+    /* Buttons */
+    .fab{
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      display:flex;
+      flex-direction:column;
+      gap: 10px;
+      z-index: 50;
+    }
+    .btn{
+      appearance:none;
+      border: 0;
+      cursor:pointer;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      transition: transform .2s ease, box-shadow .2s ease;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.45);
+      user-select:none;
+    }
+    .btn-primary{
+      background: linear-gradient(135deg, var(--accent1) 0%, var(--accent2) 100%);
+      color:#0a0a0a;
+    }
+    .btn-ghost{
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(255,255,255,0.82);
+      box-shadow: none;
+    }
+    .btn:hover{ transform: translateY(-2px); }
+    .btn:active{ transform: translateY(0px); }
+
+    /* Print */
+    @media print{
+      body{ background:#fff; color:#000; }
+      .topbar, .fab{ display:none !important; }
+      section.card{
+        page-break-after: always;
+        margin: 0;
+        border-radius: 0;
+        box-shadow:none;
+        border: none;
+        background: #fff;
+        color:#000;
+      }
+      h1,h2,h3{ -webkit-text-fill-color: initial; color:#000; }
+      .tagline,.subtitle,.feature-list li,.soft{ color:#000; }
+      .problem-box,.solution-box,.cta-box,.metric,.step{ border: 1px solid #ddd; background:#fff; }
+      .feature-list li{ border-left: 3px solid #111; }
+    }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      section.card{ padding: 34px; min-height: auto; }
+      h1{ font-size: 46px; }
+      h2{ font-size: 30px; }
+      .tagline{ font-size: 20px; }
+      .subtitle{ font-size: 16px; }
+      .step-container{ grid-template-columns: 1fr; }
+      .metric-grid{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Topbar -->
+  <div class="topbar">
+    <div class="wrap">
+      <div class="topbar-inner">
+        <div class="chip">Private Investor / Grant Overview</div>
+        <nav class="nav" aria-label="Page navigation">
+          <a href="#hero">Hero</a>
+          <a href="#problem">Problem</a>
+          <a href="#insight">Insight</a>
+          <a href="#system">System</a>
+          <a href="#product">Product</a>
+          <a href="#status">Status</a>
+          <a href="#ask">Ask</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- 1. HERO -->
+    <section id="hero" class="card hero">
+      <div class="kicker">FinTra • Pitch Website v1</div>
+      <h1>FinTra</h1>
+      <div class="tagline">Turning Salary Credited into Salary Well Spent</div>
+      <p class="subtitle soft">
+        A proactive personal finance co-pilot that takes control from salary day —
+        planning, guiding, and closing the money cycle so users never ask
+        “where did my salary go?”
+      </p>
+      <hr class="divider" />
+      <div class="metric-grid" aria-label="Quick stats">
+        <div class="metric">
+          <div class="metric-value">MVP</div>
+          <div class="metric-label">Live</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">DAU 4</div>
+          <div class="metric-label">Daily active</div>
+        </div>
+        <div class="metric">
+          <div class="metric-value">MAU 9</div>
+          <div class="metric-label">Monthly active</div>
+        </div>
+      </div>
+      <p class="subtitle" style="margin-top:22px;">
+        Focus: validating <span class="highlight">proactive engagement</span> across multiple salary cycles.
+      </p>
+    </section>
+
+    <!-- 2. PROBLEM -->
+    <section id="problem" class="card">
+      <h2>The Broken System</h2>
+
+      <div class="problem-box">
+        <h3>Finance apps react after damage is done</h3>
+        <p class="subtitle soft">
+          Most apps show insights only after money is spent.
+          They depend on user discipline instead of providing guidance,
+          and ignore the most important moment — salary credit day.
+        </p>
+      </div>
+
+      <p class="subtitle">
+        <strong>Result:</strong> Salaries disappear silently. Savings are accidental.
+        Control is typically lost in the first few days of the month.
+      </p>
+
+      <hr class="divider" />
+
+      <div class="solution-box">
+        <h3>Reactive apps vs FinTra</h3>
+        <ul class="feature-list" style="margin-top:12px;">
+          <li><strong>Others:</strong> Track spending after it happens</li>
+          <li><strong>FinTra:</strong> Guides decisions before spending happens</li>
+          <li><strong>Others:</strong> Show charts at month end</li>
+          <li><strong>FinTra:</strong> Controls the month from salary day</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3. INSIGHT -->
+    <section id="insight" class="card">
+      <h2>The Insight</h2>
+
+      <div class="solution-box">
+        <h3>Money behavior is cyclical, not daily</h3>
+        <p class="subtitle soft">
+          If guidance does not begin when salary is credited,
+          everything else becomes damage control.
+        </p>
+      </div>
+
+      <ul class="feature-list">
+        <li><strong>Day-1 control matters more than month-end charts</strong></li>
+        <li><strong>Prevention beats correction</strong></li>
+        <li><strong>A cycle must be closed, not abandoned</strong></li>
+      </ul>
+
+      <p class="subtitle" style="margin-top:18px;">
+        FinTra is built as a <span class="highlight">money operating system</span> for salaried users — not a diary of expenses.
+      </p>
+    </section>
+
+    <!-- 4. SYSTEM -->
+    <section id="system" class="card">
+      <h2>The FinTra System</h2>
+      <p class="subtitle soft">
+        A guided money cycle that starts at salary credit and ends with clarity.
+      </p>
+
+      <div class="step-container" aria-label="FinTra cycle steps">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Salary Credited</h3>
+          <p class="soft">Income event starts the cycle</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Plan Before Spend</h3>
+          <p class="soft">Allocation and intent set upfront</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Guided Spending</h3>
+          <p class="soft">Pacing, alerts, and corrections mid-cycle</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">4</div>
+          <h3>Salary Well Spent</h3>
+          <p class="soft">Closure, rollovers, and next-cycle setup</p>
+        </div>
+      </div>
+
+      <p class="subtitle" style="margin-top:24px; text-align:center;">
+        The app doesn’t wait for mistakes — <span class="highlight">it prevents them</span>.
+      </p>
+    </section>
+
+    <!-- 5. PRODUCT -->
+    <section id="product" class="card">
+      <h2>Product & Differentiation</h2>
+
+      <ul class="feature-list">
+        <li><strong>Salary-first onboarding</strong> instead of expense-first tracking</li>
+        <li><strong>Guardrails & pacing</strong> instead of passive charts</li>
+        <li><strong>Month closure loops</strong> instead of abandoned summaries</li>
+      </ul>
+
+      <div class="solution-box" style="margin-top:22px;">
+        <h3>PULSE (Logic Layer)</h3>
+        <p class="subtitle soft">
+          A rules-driven guidance engine designed to evolve with real usage data —
+          enabling proactive decisions without “AI hype”.
+        </p>
+      </div>
+
+      <hr class="divider" />
+
+      <p class="subtitle">
+        Core differentiation: shift from <span class="highlight">expense tracker</span> to <span class="highlight">spending co-pilot</span>.
+      </p>
+    </section>
+
+    <!-- 6. STATUS -->
+    <section id="status" class="card">
+      <h2>Current Status</h2>
+
+      <div class="solution-box">
+        <h3>Early MVP Validation</h3>
+        <p class="subtitle">
+          • MVP live with early adopters<br>
+          • DAU: 4 | MAU: 9<br>
+          • Iterating weekly based on behavioral feedback
+        </p>
+      </div>
+
+      <h3 style="margin-top:26px;">Team</h3>
+      <p class="subtitle soft">
+        Founder-led product with immediate onboarding of a contract-to-full-time product engineer
+        to polish the app, reduce bugs, and ship the proactive salary-cycle flows.
+        Long-term technical co-founder evaluated through execution and alignment.
+      </p>
+
+      <hr class="divider" />
+
+      <h3>Technology</h3>
+      <ul class="feature-list" style="margin-top:12px;">
+        <li><strong>Flutter (Dart)</strong> — cross-platform velocity</li>
+        <li><strong>Supabase</strong> — backend + realtime iteration</li>
+      </ul>
+    </section>
+
+    <!-- 7. ASK -->
+    <section id="ask" class="card">
+      <h2>The Ask</h2>
+
+      <div class="cta-box">
+        <h3>₹20 Lakhs</h3>
+        <p class="cta-text">
+          Grant-led / pre-seed capital to complete the proactive salary-cycle system
+          and validate retention across multiple earning cycles.
+        </p>
+      </div>
+
+      <ul class="feature-list" style="margin-top:18px;">
+        <li>Contract engineering & product polish</li>
+        <li>Instrumentation and retention validation</li>
+        <li>Controlled user acquisition experiments</li>
+      </ul>
+
+      <p class="subtitle" style="margin-top:18px;">
+        Goal: users finish the month knowing <strong>where their salary went — and why</strong>.
+      </p>
+    </section>
+
+    <footer>
+      FinTra — Turning Salary Credited into Salary Well Spent
+    </footer>
+  </main>
+
+  <!-- Floating Actions -->
+  <div class="fab" aria-label="Actions">
+    <button class="btn btn-primary" onclick="window.print()">Download PDF</button>
+    <button class="btn btn-ghost" onclick="scrollToTop()">Back to Top</button>
+  </div>
+
+  <script>
+    // Smooth scroll for nav links
+    document.querySelectorAll('.nav a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const id = a.getAttribute('href');
+        const el = document.querySelector(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+
+    function scrollToTop(){
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
