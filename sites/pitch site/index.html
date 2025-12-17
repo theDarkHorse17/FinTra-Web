@@ -1340,128 +1340,202 @@
   </main>
 
   <!-- FLOATING ACTION BUTTONS -->
-<div class="fab">
-  <button class="btn btn-fab-primary" onclick="window.location.href='https://docs.google.com/presentation/d/1vIxiLaaYnJeovvHOKEDZCibjLJyJ_L12aWQPsy6cHcc/edit?usp=sharing'">
-    Master Pitch Deck
+<div class="fab-container">
+  <!-- MAIN FAB -->
+  <button class="fab-main" id="fabMain" aria-label="Open menu">
+    ☰
   </button>
 
-  <button 
-    class="btn btn-fab-secondary"
-    onclick="window.location.href='https://fintrahq.mintlify.app/asks'">
-    Allocation Details
-  </button>
+  <!-- FAB MENU -->
+  <div class="fab-menu" id="fabMenu">
+    <button
+      class="fab-item primary"
+      onclick="window.location.href='https://docs.google.com/presentation/d/1vIxiLaaYnJeovvHOKEDZCibjLJyJ_L12aWQPsy6cHcc/edit?usp=sharing'">
+      Master Pitch Deck
+    </button>
 
-  <button 
-    class="btn btn-fab-utility"
-    onclick="window.scrollTo({top:0,behavior:'smooth'})">
-    Back to Top
-  </button>
+    <button
+      class="fab-item secondary"
+      onclick="window.location.href='https://fintrahq.mintlify.app/asks'">
+      Allocation Details
+    </button>
+
+    <button
+      class="fab-item utility"
+      onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+      Back to Top
+    </button>
+  </div>
 </div>
+
+
 
 <style>
 /* =============================
    FAB CONTAINER
-   ============================== */
-
-.fab {
+   ============================= */
+.fab-container {
   position: fixed;
   bottom: 28px;
   right: 28px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  z-index: 50;
+  z-index: 999;
 }
 
 /* =============================
-   BASE BUTTON
-   ============================== */
+   MAIN FAB
+   ============================= */
+.fab-main {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top left, #3204ff, #535e6f 70%);
+  color: #fff;
+  border: none;
+  font-size: 22px;
+  cursor: pointer;
+  box-shadow:
+    0 0 0 0 rgba(106,74,255,0.6),
+    0 12px 30px rgba(0,0,0,0.55);
+  animation: fab-pulse 2.2s infinite;
+}
 
-.btn {
+@keyframes fab-pulse {
+  0% {
+    box-shadow:
+      0 0 0 0 rgba(255, 25, 0, 0.5),
+      0 12px 30px rgba(0,0,0,0.55);
+  }
+  70% {
+    box-shadow:
+      0 0 0 14px rgba(106,74,255,0),
+      0 12px 30px rgba(0,0,0,0.55);
+  }
+  100% {
+    box-shadow:
+      0 0 0 0 rgba(106,74,255,0),
+      0 12px 30px rgba(0,0,0,0.55);
+  }
+}
+
+
+/* Shake hint */
+.fab-main.shake {
+  animation: fab-shake 0.4s ease;
+}
+
+@keyframes fab-shake {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(3deg); }
+  50% { transform: rotate(-3deg); }
+  75% { transform: rotate(2deg); }
+  100% { transform: rotate(0); }
+}
+
+/* =============================
+   MENU
+   ============================= */
+.fab-menu {
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: all 0.25s ease;
+}
+
+.fab-menu.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* =============================
+   MENU ITEMS
+   ============================= */
+.fab-item {
   padding: 14px 22px;
   border-radius: 999px;
   font-size: 15px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.25s ease;
-  text-align: center;
-}
-
-/* =============================
-   PRIMARY – MAIN ACTION
-   ============================== */
-
-.btn-fab-primary {
-  background: rgba(79,172,254,0.18);
-  color: var(--text);
-  border: 1px solid rgba(79,172,254,0.45);
-  box-shadow: 0 10px 26px rgba(0,0,0,0.45);
-  font-weight: 700;
-}
-
-.btn-fab-primary:hover {
-  background: rgba(79,172,254,0.28);
-  transform: translateY(-3px);
-}
-
-/* =============================
-   SECONDARY – REFERENCE
-   ============================== */
-
-.btn-fab-secondary {
-  background: rgba(255,255,255,0.05);
-  color: var(--soft);
-  border: 1px solid rgba(255,255,255,0.18);
+  text-align: left;
+  min-width: 200px;
+  border: none;
+  transition: transform 0.2s ease, background 0.2s ease;
   box-shadow: 0 6px 18px rgba(0,0,0,0.4);
 }
 
-.btn-fab-secondary:hover {
-  background: rgba(255,255,255,0.1);
-  transform: translateY(-2px);
+.fab-item:hover {
+  transform: translateX(-4px);
 }
 
-/* =============================
-   UTILITY – NAVIGATION
-   ============================== */
+/* Variants */
+.fab-item.primary {
+  background: rgba(79,172,254,0.18);
+  color: #fff;
+  border: 1px solid rgba(79,172,254,0.45);
+}
 
-.btn-fab-utility {
+.fab-item.secondary {
+  background: rgba(255,255,255,0.05);
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+.fab-item.utility {
   background: transparent;
   color: rgba(255,255,255,0.65);
   border: 1px dashed rgba(255,255,255,0.18);
   box-shadow: none;
 }
 
-.btn-fab-utility:hover {
-  background: rgba(255,255,255,0.06);
-  color: var(--text);
-}
-
 /* =============================
-   MOBILE TIGHTENING
-   ============================== */
-
+   MOBILE
+   ============================= */
 @media (max-width: 768px) {
-  .fab {
+  .fab-container {
     bottom: 16px;
     right: 16px;
   }
 
-  .btn {
-    padding: 12px 18px;
+  .fab-item {
     font-size: 14px;
+    padding: 12px 18px;
   }
 }
+
 </style>
-
-
-
   <script>
-    document.querySelectorAll('.nav a').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth', block:'start'});
-      });
-    });
-  </script>
+  const fabMain = document.getElementById('fabMain');
+  const fabMenu = document.getElementById('fabMenu');
+
+  // Toggle menu
+  fabMain.addEventListener('click', () => {
+    fabMenu.classList.toggle('open');
+  });
+
+  // Subtle shake on scroll (throttled)
+  let lastShake = 0;
+  window.addEventListener('scroll', () => {
+    const now = Date.now();
+    if (now - lastShake > 1200) {
+      fabMain.classList.add('shake');
+      setTimeout(() => fabMain.classList.remove('shake'), 400);
+      lastShake = now;
+    }
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.fab-container')) {
+      fabMenu.classList.remove('open');
+    }
+  });
+</script>
+
 </body>
 </html>
