@@ -37,9 +37,7 @@
       font-family:var(--font);
       color:var(--ink);
       background:
-        radial-gradient(1100px 650px at 70% 30%, var(--glowA), transparent 60%),
-        radial-gradient(900px 600px at 35% 75%, var(--glowB), transparent 62%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+       #0b0f18;
       overflow-x:hidden;
     }
 
@@ -83,13 +81,13 @@
       color:var(--muted);
       font-size:13px;
     }
-    .navLinks a{ padding:8px 10px; border-radius:10px; transition: background .2s; }
+    .navLinks a{ padding:8px 10px; border-radius:10px; }
     .navLinks a:hover{ background: rgba(255,255,255,.03); }
 
     .btn{
       appearance:none; border:1px solid var(--stroke);
       border-radius:14px;
-      padding:12px 18px;
+      padding:12px 16px;
       font-weight:700; letter-spacing:.15px;
       cursor:pointer;
       background: rgba(233,237,245,.08);
@@ -110,10 +108,10 @@
     }
 
     /* Sections */
-    section{ padding:96px 0; }
+    section{ padding:88px 0; }
     .sectionHead{
       display:flex; flex-direction:column; gap:12px;
-      margin-bottom:32px;
+      margin-bottom:28px;
     }
     .kicker{
       display:inline-flex; align-items:center; gap:10px;
@@ -134,15 +132,16 @@
       font-size:56px; line-height:1.04; font-weight:770;
     }
     h2{
-      font-size:36px; line-height:1.12; font-weight:760;
+      font-size:34px; line-height:1.12; font-weight:760;
     }
     p{ margin:0; color:var(--muted); line-height:1.6; }
     .fine{ color:var(--muted2); font-size:13px; letter-spacing:.1px; }
 
     /* Reveal on scroll */
     .reveal{
-      opacity:0; transform: translateY(20px);
-      transition: opacity .7s ease, transform .7s ease;
+      opacity:0; transform: translateY(14px);
+      transition: opacity .55s ease, transform .55s ease;
+      will-change: opacity, transform;
     }
     .reveal.in{
       opacity:1; transform: translateY(0);
@@ -152,22 +151,22 @@
     .heroGrid{
       display:grid;
       grid-template-columns: 1.08fr .92fr;
-      gap:64px;
+      gap:48px;
       align-items:center;
     }
     .heroSub{
-      font-size:19px;
+      font-size:18px;
       max-width:56ch;
-      margin-top:16px;
+      margin-top:14px;
     }
     .heroLine{
-      margin-top:20px;
+      margin-top:18px;
       color:var(--muted2);
       font-size:14px;
     }
     .heroActions{
-      display:flex; gap:16px; flex-wrap:wrap;
-      margin-top:32px;
+      display:flex; gap:14px; flex-wrap:wrap;
+      margin-top:28px;
     }
 
     /* UI Mock */
@@ -235,19 +234,62 @@
       font-weight:650;
       letter-spacing:.2px;
     }
-    .rings{ display:flex; gap:12px; margin-top:12px; align-items:center; }
-    .ring{
-      width:56px; height:56px; border-radius:50%;
-      background: conic-gradient(from 180deg, rgba(120,180,255,.92) var(--p,40%), rgba(233,237,245,.08) 0);
-      mask: radial-gradient(circle, transparent 58%, #000 59%);
-      box-shadow: 0 0 24px rgba(120,180,255,.18);
-      animation: slowSpin 10s linear infinite;
-    }
-    .ring.alt{
-      background: conic-gradient(from 180deg, rgba(140,255,210,.82) var(--p,62%), rgba(233,237,245,.08) 0);
-      box-shadow: 0 0 24px rgba(140,255,210,.14);
-      animation-duration: 13s;
-    }
+   .rings{
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+/* Base ring */
+.ring{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  /* Start at 0 */
+  --fill: 0%;
+
+  background: conic-gradient(
+    from 180deg,
+    rgba(120,180,255,.92) var(--fill),
+    rgba(233,237,245,.08) 0
+  );
+
+  mask: radial-gradient(circle, transparent 58%, #000 59%);
+  box-shadow: 0 0 24px rgba(120,180,255,.18);
+
+  /* One-time animation */
+  animation: fillRing 900ms ease-out forwards;
+}
+
+/* Secondary ring */
+.ring.alt{
+  background: conic-gradient(
+    from 180deg,
+    rgba(140,255,210,.82) var(--fill),
+    rgba(233,237,245,.08) 0
+  );
+
+  box-shadow: 0 0 24px rgba(140,255,210,.14);
+}
+
+@property --fill {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+/* Animation */
+@keyframes fillRing {
+  from {
+    --fill: 0%;
+  }
+  to {
+    --fill: var(--p);
+  }
+}
+
     @keyframes slowSpin{ 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
     .streak{
       display:flex; justify-content:space-between; align-items:center;
@@ -361,6 +403,7 @@
       background: rgba(255,255,255,.02);
       padding:16px;
       box-shadow: var(--shadow2);
+      transform: translateY(0);
       transition: transform .22s ease, border-color .22s ease, background .22s ease;
       min-height:120px;
     }
@@ -439,7 +482,7 @@
     }
     .stepText p{ font-size:14px; }
 
-    /* CORE FEATURES */
+    /* CORE FEATURES (depth without noise) */
     .featureGrid{
       display:grid;
       grid-template-columns: repeat(3, 1fr);
@@ -692,10 +735,6 @@
       outline:none;
       box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
     }
-    .input:focus{
-      border-color: rgba(120,180,255,.4);
-      box-shadow: 0 0 0 3px rgba(120,180,255,.15);
-    }
     .input::placeholder{ color: rgba(233,237,245,.42); }
     .secure{
       margin-top:10px;
@@ -731,10 +770,7 @@
     /* Responsive */
     @media (max-width: 980px){
       h1{ font-size:46px; }
-      h2{ font-size:32px; }
-      .heroGrid{ grid-template-columns: 1fr; text-align:center; }
-      .heroActions{ justify-content:center; }
-      .mock{ order:-1; margin-bottom:40px; }
+      .heroGrid{ grid-template-columns: 1fr; }
       .split{ grid-template-columns: 1fr; }
       .capGrid{ grid-template-columns: 1fr 1fr; }
       .step{ grid-template-columns: 1fr; }
@@ -743,15 +779,14 @@
       .signals{ grid-template-columns: 1fr; }
       .founder{ grid-template-columns: 1fr; }
       .ctaGrid{ grid-template-columns: 1fr; }
-      .form{ justify-content:stretch; }
-      .input{ min-width:100%; }
+      .form{ justify-content:flex-start; }
       .secure{ text-align:left; }
       .navLinks{ display:none; }
-      section{ padding:72px 0; }
     }
 
     @media (prefers-reduced-motion: reduce){
-      .ring, .bar > i, .miniLine > i, .reveal { animation:none !important; transition:none !important; }
+      .ring, .bar > i, .miniLine > i { animation:none !important; }
+      .reveal{ transition:none !important; }
     }
   </style>
 </head>
@@ -760,7 +795,7 @@
   <!-- NAV -->
   <div class="nav">
     <div class="wrap navInner">
-      <a href="#top" class="brand"><span class="dot"></span> FinTra</a>
+      <div class="brand"><span class="dot"></span> FinTra</div>
       <div class="navLinks" aria-label="Navigation">
         <a href="#problem">Problem</a>
         <a href="#solution">Solution</a>
@@ -773,140 +808,222 @@
   </div>
 
   <!-- 1. HERO -->
-  <section id="top">
-    <div class="wrap">
-      <div class="heroGrid">
-        <div class="reveal">
-          <div class="kicker"><span class="dot"></span> Early Access</div>
-          <h1>Salary Day Becomes Clarity Day</h1>
-          <p class="heroSub">
-            You don’t track money here.<br/>
-            You <b style="color:rgba(233,237,245,.92); font-weight:800;">command</b> it.
-          </p>
-          <p class="heroLine">Relief. Control. Finally, an app that understands me.</p>
-          <div class="heroActions">
-            <button class="btn primary" data-scroll="#final">Get Early Access</button>
-            <button class="btn secondary" data-scroll="#how">See How It Works</button>
-          </div>
+ <!-- 1. HERO -->
+<section id="top">
+  <div class="wrap">
+    <div class="heroGrid">
+
+      <!-- Left: Message -->
+      <div class="reveal">
+        <div class="kicker">
+          <span class="dot"></span> Early Access
         </div>
 
-        <div class="mock reveal" aria-label="FinTra dashboard preview">
-          <div class="mockTop">
-            <div class="brand"><span class="dot"></span> FinTra</div>
-            <div class="pill">Dashboard</div>
-          </div>
+        <h1>Your salary deserves a plan.</h1>
 
-          <div class="grid">
-            <div class="row">
-              <div class="card">
-                <div class="label">This month</div>
-                <div class="big">₹<span id="spent">18,420</span> <span>spent</span></div>
-                <div class="rings">
-                  <div class="ring" style="--p:42%"></div>
-                  <div class="ring alt" style="--p:63%"></div>
-                </div>
-                <div class="streak">
-                  <span>Streak</span>
-                  <span><b id="streak">7</b> days</span>
-                </div>
-              </div>
+        <p class="heroSub">
+          Most people react to money.<br/>
+          FinTra helps you <b style="color:rgba(233,237,245,.92); font-weight:800;">
+          decide before it disappears</b>.
+        </p>
 
-              <div class="card">
-                <div class="label">Savings buckets</div>
-                <div class="buckets">
-                  <div class="bucket">
-                    <span>Emergency</span>
-                    <span style="display:flex;align-items:center;gap:10px;">
-                      ₹<b>6,000</b>
-                      <span class="bar" style="--w:52%"><i></i></span>
-                    </span>
-                  </div>
-                  <div class="bucket">
-                    <span>Goa Trip</span>
-                    <span style="display:flex;align-items:center;gap:10px;">
-                      ₹<b>3,200</b>
-                      <span class="bar" style="--w:38%"><i></i></span>
-                    </span>
-                  </div>
-                  <div class="bucket">
-                    <span>MacBook</span>
-                    <span style="display:flex;align-items:center;gap:10px;">
-                      ₹<b>9,500</b>
-                      <span class="bar" style="--w:70%"><i></i></span>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+        <p class="heroLine">
+          No noise. No judgement. Just clarity you can act on.
+        </p>
 
-            <div class="card" style="min-height:auto;">
-              <div class="label">Calm insights</div>
-              <div style="display:flex;gap:14px;flex-wrap:wrap;color:rgba(233,237,245,.78);font-size:13px;">
-                <div style="flex:1;min-width:180px;"><b style="color:rgba(233,237,245,.9);">Today:</b> spending stayed inside plan.</div>
-                <div style="flex:1;min-width:180px;"><b style="color:rgba(233,237,245,.9);">Pattern:</b> late-night spikes detected.</div>
-                <div style="flex:1;min-width:180px;"><b style="color:rgba(233,237,245,.9);">Next:</b> nudge at 10:30pm.</div>
-              </div>
-            </div>
-          </div>
+        <div class="heroActions">
+          <button class="btn primary" data-scroll="#final">
+            Get Early Access
+          </button>
+          <button class="btn secondary" data-scroll="#how">
+            See How It Works
+          </button>
         </div>
       </div>
 
-      <div class="fine reveal" style="margin-top:32px;">
-        No noise. No judgement. Just clarity you can act on.
+      <!-- Right: UI Mock -->
+      <div class="mock reveal" aria-label="FinTra dashboard preview">
+        <div class="mockTop">
+          <div class="brand">
+            <span class="dot"></span> FinTra
+          </div>
+          <div class="pill">Dashboard</div>
+        </div>
+
+        <div class="grid">
+          <div class="row">
+            <!-- Allocation Card -->
+            <div class="card">
+              <div class="label">This month</div>
+              <div class="big">
+                ₹18,420
+                <span>allocated</span>
+              </div>
+
+              <div class="rings">
+                <div class="ring" style="--p:42%"></div>
+                <div class="ring alt" style="--p:63%"></div>
+              </div>
+
+              <div class="streak">
+                <span>Discipline streak</span>
+                <span><b id="streak">7</b> days</span>
+              </div>
+            </div>
+
+            <!-- Buckets -->
+            <div class="card">
+              <div class="label">Savings buckets</div>
+
+              <div class="buckets">
+                <div class="bucket">
+                  <span>Savings</span>
+                  <span style="display:flex;align-items:center;gap:10px;">
+                    <b>₹6,000</b>
+                    <span class="bar" style="--w:52%"><i></i></span>
+                  </span>
+                </div>
+
+                <div class="bucket">
+                  <span>Goa Trip</span>
+                  <span style="display:flex;align-items:center;gap:10px;">
+                    <b>₹3,200</b>
+                    <span class="bar" style="--w:38%"><i></i></span>
+                  </span>
+                </div>
+
+                <div class="bucket">
+                  <span>MacBook</span>
+                  <span style="display:flex;align-items:center;gap:10px;">
+                    <b>₹9,500</b>
+                    <span class="bar" style="--w:70%"><i></i></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insight Strip -->
+          <div class="card" style="min-height:auto;">
+            <div class="label">Calm insights</div>
+            <div style="
+              display:flex;
+              gap:14px;
+              flex-wrap:wrap;
+              color:rgba(233,237,245,.78);
+              font-size:13px;
+            ">
+              <div style="flex:1;min-width:180px;">
+                <b style="color:rgba(233,237,245,.9);">Today:</b>
+                spending stayed inside plan.
+              </div>
+
+              <div style="flex:1;min-width:180px;">
+                <b style="color:rgba(233,237,245,.9);">Pattern:</b>
+                late-night spikes detected.
+              </div>
+
+              <div style="flex:1;min-width:180px;">
+                <b style="color:rgba(233,237,245,.9);">Next:</b>
+                nudge at 10:30pm.
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </section>
+
+    <!-- Footer line -->
+    <div class="fine reveal" style="margin-top:20px;">
+      A quiet system for people who take money seriously.
+    </div>
+  </div>
+</section>
+
 
   <!-- 2. PROBLEM -->
   <section id="problem">
-    <div class="wrap">
-      <div class="sectionHead reveal">
-        <div class="kicker">Why Smart Earners Still Feel Broke</div>
-        <h2>Good salary. Zero clarity.</h2>
-        <p>Blunt truth: most people don’t have a money problem. They have a clarity problem.</p>
-      </div>
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="kicker">Why Smart Earners Still Feel Broke</div>
+      <h2>Good salary. Zero clarity.</h2>
+      <p>Blunt truth: most people don’t have a money problem.<br/>They have a <b style="font-weight:800;">clarity problem</b>.</p>
+    </div>
 
-      <div class="split">
-        <div class="ghostPanel reveal">
-          <div class="label" style="position:relative; z-index:1;">Chaotic reality</div>
-          <div class="chaosList">
-            <div class="chaosItem">
-              <span>Food delivery (again)</span>
-              <span class="tag">₹ 640</span>
-            </div>
-            <div class="chaosItem">
-              <span>Subscriptions you forgot</span>
-              <span class="tag">₹ 899</span>
-            </div>
-            <div class="chaosItem">
-              <span>Impulse buys</span>
-              <span class="tag">₹ 1,250</span>
-            </div>
-            <div class="chaosItem">
-              <span>“I’ll save next month”</span>
-              <span class="tag">pattern</span>
-            </div>
-            <div class="chaosItem">
-              <span>Money tracking… after damage</span>
-              <span class="tag">late</span>
-            </div>
+    <div class="split">
+      <!-- Left: Chaotic Expense Feed -->
+      <div class="ghostPanel reveal" style="position:relative; overflow:hidden;">
+        <div class="label" style="position:relative; z-index:2; margin-bottom:16px;">The noisy reality</div>
+        
+        <!-- Scrolling-like transaction feed -->
+        <div style="position:relative; z-index:1; display:grid; gap:10px; padding-right:8px;">
+          <div class="chaosItem" style="opacity:0.95; transform: translateX(4px);">
+            <span>Swiggy • Food delivery</span>
+            <span class="tag" style="background:rgba(255,100,100,.12); color:rgba(255,140,140,.9); border-color:rgba(255,100,100,.2);">₹ 640</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.88;">
+            <span>Netflix (forgot to cancel)</span>
+            <span class="tag">₹ 649</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.92; transform: translateX(-3px);">
+            <span>Amazon • Impulse gadget</span>
+            <span class="tag" style="background:rgba(255,100,100,.12); color:rgba(255,140,140,.9); border-color:rgba(255,100,100,.2);">₹ 1,250</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.85;">
+            <span>Zomato • Late night</span>
+            <span class="tag" style="background:rgba(255,100,100,.12); color:rgba(255,140,140,.9); border-color:rgba(255,100,100,.2);">₹ 520</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.9;">
+            <span>Spotify Premium</span>
+            <span class="tag">₹ 119</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.82; transform: translateX(2px);">
+            <span>Uber • Weekend ride</span>
+            <span class="tag">₹ 380</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.78;">
+            <span>“I’ll save next month”</span>
+            <span class="tag" style="background:rgba(255,180,100,.12); color:rgba(255,200,120,.9); border-color:rgba(255,180,100,.2);">pattern</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.75;">
+            <span>Checking balance... after it's gone</span>
+            <span class="tag" style="background:rgba(255,100,100,.12); color:rgba(255,140,140,.9); border-color:rgba(255,100,100,.2);">late</span>
           </div>
         </div>
 
-        <div class="truths">
-          <div class="truth reveal">Good salary. Zero clarity.</div>
-          <div class="truth reveal">Savings left to luck.</div>
-          <div class="truth reveal">Finance apps that judge, not guide.</div>
+        <!-- Subtle blur overlay for depth -->
+        <div style="position:absolute; inset:0; backdrop-filter:blur(4px); pointer-events:none; opacity:0.15;"></div>
+      </div>
+
+      <!-- Right: Calm Truths -->
+      <div class="truths">
+        <div class="truth reveal" style="font-size:22px; padding:24px; text-align:center;">
+          Money flows in.<br/>
+          <span style="opacity:0.7;">But where does it go?</span>
+        </div>
+        <div class="truth reveal" style="font-size:20px; padding:24px; text-align:center; opacity:0.9;">
+          Savings?<br/>
+          <span style="opacity:0.7;">Left to luck and leftovers.</span>
+        </div>
+        <div class="truth reveal" style="font-size:20px; padding:24px; text-align:center; opacity:0.9;">
+          Most apps?<br/>
+          <span style="opacity:0.7;">They track. They judge.<br/>They don’t guide.</span>
         </div>
       </div>
     </div>
-  </section>
+
+    <div class="fine reveal" style="margin-top:40px; text-align:center; max-width:720px; margin-left:auto; margin-right:auto;">
+      You’re not bad with money.<br/>
+      You’re just using a system that wasn’t built for real human behavior.
+    </div>
+  </div>
+</section>
 
   <!-- 3. SOLUTION -->
   <section id="solution">
     <div class="wrap">
       <div class="sectionHead reveal">
-        <div class="pulseBadge"><span class="pulseOrb"></span> Pulse introduced — an AI companion energy (not a cartoon)</div>
+        <div class="pulseBadge"><span class="pulseOrb"></span> Pulse — an AI companion energy (not a cartoon)</div>
         <h2>Meet Your Money Brain</h2>
         <p>
           FinTra doesn’t just log transactions.<br/>
@@ -948,7 +1065,7 @@
         <div class="step reveal">
           <div class="miniMock">
             <div class="miniRow"><span>Step 1</span><span>Allocation</span></div>
-            <div class="miniLine" style="--w:72%"><i></i></div>
+            <div class="miniLine" style="--w:72%"><i style="--w:72%"></i></div>
             <div class="miniRow" style="margin-top:12px;"><span>Needs</span><span>45%</span></div>
             <div class="miniLine"><i style="--w:45%"></i></div>
             <div class="miniRow" style="margin-top:10px;"><span>Savings</span><span>30%</span></div>
@@ -1123,60 +1240,84 @@
   </section>
 
   <!-- 8. FOUNDER -->
-  <section id="founder">
-    <div class="wrap">
-      <div class="sectionHead reveal">
-        <div class="kicker">Founder</div>
-        <h2>Trust through transparency</h2>
-        <p>Personal, grounded, and built from lived frustration — not a boardroom.</p>
+   <section id="founder">
+  <div class="wrap">
+
+    <div class="quoteWrap reveal">
+
+      <style>
+        /* Scoped newspaper-style quote */
+        #founder .quoteWrap{
+          max-width: 720px;
+          margin: 0 auto;
+          text-align: center;
+          padding: 40px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        #founder .quoteMark{
+          font-size: 64px;
+          line-height: 1;
+          font-weight: 800;
+          color: rgba(233,237,245,.18);
+          margin-bottom: -10px;
+          user-select: none;
+        }
+
+        #founder .quoteText{
+          margin: 0;
+          font-size: 28px;
+          font-weight: 760;
+          letter-spacing: -0.01em;
+          line-height: 1.25;
+          color: rgba(233,237,245,.92);
+        }
+
+        #founder .quoteSub{
+          font-size: 15px;
+          line-height: 1.6;
+          color: rgba(233,237,245,.68);
+          max-width: 58ch;
+          margin: 0 auto;
+        }
+
+        #founder .quoteBy{
+          margin-top: 6px;
+          font-size: 13px;
+          letter-spacing: 0.3px;
+          text-transform: uppercase;
+          color: rgba(233,237,245,.46);
+        }
+
+        @media (max-width: 640px){
+          #founder .quoteText{
+            font-size: 24px;
+          }
+        }
+      </style>
+
+      <div class="quoteMark">“</div>
+
+      <blockquote class="quoteText">
+        I built FinTra because I needed it.
+      </blockquote>
+
+      <div class="quoteSub">
+        Not a bank. Not a corporation.<br/>
+        Just a system I wish existed when my salary hit and clarity didn’t.
       </div>
 
-      <div class="founder reveal">
-        <div class="photo" aria-label="Founder photo placeholder"></div>
-        <div>
-          <p style="font-size:18px; color:rgba(233,237,245,.86); line-height:1.5;">
-            Built by someone who lived the problem.<br/>
-            <span style="color:rgba(233,237,245,.92); font-weight:780;">Not a bank. Not a corporation.</span>
-          </p>
-          <p style="margin-top:14px;">
-            The goal is simple: make salary day feel like control — not confusion.
-          </p>
-          <p class="fine" style="margin-top:14px;">
-            Replace the photo placeholder with your real portrait (clean, neutral background).
-          </p>
-        </div>
+      <div class="quoteBy">
+        — Founder, FinTra
       </div>
+
     </div>
-  </section>
 
-  <!-- 9. SOCIAL PROOF / EARLY SIGNALS -->
-  <section id="signals">
-    <div class="wrap">
-      <div class="sectionHead reveal">
-        <div class="kicker">Early Signals</div>
-        <h2>Quiet confidence</h2>
-        <p>No hype. Just proof that it’s real and moving.</p>
-      </div>
+  </div>
+</section>
 
-      <div class="signals">
-        <div class="signal reveal">
-          <div class="num" data-count="25">0</div>
-          <p>early users</p>
-        </div>
-        <div class="signal reveal">
-          <div class="num" data-count="1">0</div>
-          <p>built solo, iterated weekly</p>
-        </div>
-        <div class="signal reveal">
-          <div class="num" data-count="100">0</div>
-          <p>feedback drives features (not assumptions)</p>
-        </div>
-      </div>
-      <div class="fine reveal" style="margin-top:12px;">
-        Replace these numbers when your metrics evolve — the style stays the same.
-      </div>
-    </div>
-  </section>
 
   <!-- 10. FINAL CTA -->
   <section id="final" class="cta">
@@ -1203,99 +1344,142 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- 11. FOOTER -->
   <footer>
     <div class="wrap foot">
       <div style="display:flex;align-items:center;gap:10px;">
         <span class="dot"></span> <span>FinTra</span>
         <span style="opacity:.55;">© <span id="year"></span></span>
       </div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <!-- 
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <a href="#" onclick="return false;">Privacy</a>
         <a href="#" onclick="return false;">Terms</a>
         <a href="#" onclick="return false;">Contact</a>
-      </div>
+        </div> 
+      -->
     </div>
   </footer>
 
   <script>
     // Smooth scroll
-    document.querySelectorAll("[data-scroll]").forEach(el => {
-      el.addEventListener("click", e => {
-        e.preventDefault();
+    document.querySelectorAll("[data-scroll]").forEach(el=>{
+      el.addEventListener("click", ()=>{
         const id = el.getAttribute("data-scroll");
         const target = document.querySelector(id);
-        if (target) target.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
       });
     });
 
     // Reveal on scroll
-    const revealEls = document.querySelectorAll(".reveal");
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) entry.target.classList.add("in");
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("in");
       });
     }, { threshold: 0.12 });
-    revealEls.forEach(el => io.observe(el));
+    revealEls.forEach(el=>io.observe(el));
 
-    // Subtle live numbers in hero mock
+    // Calm ticking numbers in hero mock (not loud, not casino)
     const spentEl = document.getElementById('spent');
     const streakEl = document.getElementById('streak');
     const streak2El = document.getElementById('streak2');
 
-    function parseNum(s) { return Number(String(s).replace(/,/g, '')); }
-    function fmt(n) { return n.toLocaleString('en-IN'); }
+    function parseNum(s){ return Number(String(s).replace(/,/g,'')); }
+    function fmt(n){ return n.toLocaleString('en-IN'); }
 
     let spent = parseNum(spentEl.textContent);
     let streak = parseNum(streakEl.textContent);
 
     setInterval(() => {
-      const delta = Math.floor(Math.random() * 18);
+      const delta = Math.floor(Math.random() * 18); // 0..17
       spent += delta;
       spentEl.textContent = fmt(spent);
 
+      // Keep streak stable. Rare increment.
       if (Math.random() < 0.015) {
         streak += 1;
-        streakEl.textContent = streak;
-        streak2El.textContent = streak;
+        streakEl.textContent = String(streak);
+        streak2El.textContent = String(streak);
       }
     }, 1400);
 
-    // Count-up for early signals
-    document.querySelectorAll("[data-count]").forEach(el => {
-      const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const target = Number(el.getAttribute("data-count"));
-            const duration = 900;
-            const start = performance.now();
+    // Count-up for early signals when visible
+    const counters = document.querySelectorAll("[data-count]");
+    const countIO = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = Number(el.getAttribute("data-count"));
+        const duration = 900;
+        const start = performance.now();
+        const from = 0;
 
-            function tick(now) {
-              const t = Math.min(1, (now - start) / duration);
-              const val = Math.floor(t * target);
-              el.textContent = val.toLocaleString("en-IN");
-              if (t < 1) requestAnimationFrame(tick);
-            }
-            requestAnimationFrame(tick);
-            observer.unobserve(el);
-          }
-        });
-      }, { threshold: 0.3 });
-      observer.observe(el);
-    });
+        function tick(now){
+          const t = Math.min(1, (now - start) / duration);
+          const val = Math.floor(from + (target - from) * (t));
+          el.textContent = val.toLocaleString("en-IN");
+          if(t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countIO.unobserve(el);
+      });
+    }, {threshold:0.25});
+    counters.forEach(c=>countIO.observe(c));
 
-    // Waitlist form (frontend only)
+    // Waitlist form (front-end only; hook to backend later)
     const form = document.getElementById("waitlistForm");
     const msg = document.getElementById("formMsg");
-    form.addEventListener("submit", e => {
-      e.preventDefault();
-      msg.style.display = "block";
-      msg.style.color = "rgba(140,255,210,.82)";
-      msg.textContent = "You're in. We'll email you when early access opens.";
-      form.reset();
-    });
 
-    // Year
+   form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = new FormData(form).get("email");
+  const button = form.querySelector("button");
+
+  // Basic validation
+  if (!email || !email.includes("@")) {
+    msg.style.display = "block";
+    msg.style.color = "rgba(255,120,120,.85)";
+    msg.textContent = "Enter a valid email.";
+    return;
+  }
+
+  // Lock UI
+  button.disabled = true;
+  button.textContent = "Joining…";
+
+  try {
+    const res = await fetch(
+      "https://aesncvmhlgmdnmhwablm.supabase.co/functions/v1/waitlist",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Request failed");
+    }
+
+    msg.style.display = "block";
+    msg.style.color = "rgba(140,255,210,.72)";
+    msg.textContent = "You're in. We'll email you when early access opens.";
+    form.reset();
+
+  } catch (err) {
+    msg.style.display = "block";
+    msg.style.color = "rgba(255,120,120,.85)";
+    msg.textContent = "Something went wrong. Try again.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Join Early Access";
+  }
+});
+
+
+
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
