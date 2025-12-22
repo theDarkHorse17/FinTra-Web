@@ -1,0 +1,1486 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>FinTra — Salary Day Becomes Clarity Day</title>
+  <meta name="description" content="FinTra turns salary day into clarity day — proactive allocation, behavioral nudges, goal-linked savings, and streak-driven discipline."/>
+  <style>
+    :root{
+      --bg0:#06070b;
+      --bg1:#0b0f18;
+      --card:rgba(255,255,255,.035);
+      --card2:rgba(0,0,0,.22);
+      --stroke:rgba(233,237,245,.10);
+      --stroke2:rgba(233,237,245,.08);
+      --ink:#e9edf5;
+      --muted:rgba(233,237,245,.68);
+      --muted2:rgba(233,237,245,.46);
+
+      --glowA:rgba(120,180,255,.14);
+      --glowB:rgba(140,255,210,.10);
+      --glowC:rgba(255,255,255,.06);
+
+      --shadow: 0 22px 85px rgba(0,0,0,.62);
+      --shadow2: 0 12px 36px rgba(0,0,0,.42);
+
+      --r:22px;
+      --r2:18px;
+
+      --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--ink);
+      background:
+       #0b0f18;
+      overflow-x:hidden;
+    }
+
+    /* Subtle noise */
+    body::before{
+      content:"";
+      position:fixed; inset:0;
+      pointer-events:none;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.7' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='260' height='260' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E");
+      mix-blend-mode:overlay;
+      opacity:.06;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    button, input{ font-family:inherit; }
+    .wrap{ max-width:1180px; margin:0 auto; padding:0 24px; }
+
+    /* Top nav */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(180deg, rgba(6,7,11,.72), rgba(6,7,11,.35));
+      border-bottom:1px solid rgba(233,237,245,.06);
+    }
+    .navInner{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:16px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:10px;
+      font-weight:760; letter-spacing:.2px;
+      color:rgba(233,237,245,.88);
+    }
+    .dot{
+      width:9px; height:9px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(120,180,255,.45));
+      box-shadow: 0 0 18px rgba(120,180,255,.55);
+    }
+    .navLinks{
+      display:flex; align-items:center; gap:16px;
+      color:var(--muted);
+      font-size:13px;
+    }
+    .navLinks a{ padding:8px 10px; border-radius:10px; }
+    .navLinks a:hover{ background: rgba(255,255,255,.03); }
+
+    .btn{
+      appearance:none; border:1px solid var(--stroke);
+      border-radius:14px;
+      padding:12px 16px;
+      font-weight:700; letter-spacing:.15px;
+      cursor:pointer;
+      background: rgba(233,237,245,.08);
+      color:var(--ink);
+      box-shadow: var(--shadow2);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .btn:hover{ transform: translateY(-1px); background: rgba(233,237,245,.11); border-color: rgba(233,237,245,.18); }
+    .btn:active{ transform: translateY(0) scale(.99); }
+    .btn.primary{
+      border-color: rgba(120,180,255,.35);
+      background:
+        radial-gradient(160px 90px at 30% 30%, rgba(120,180,255,.22), transparent 60%),
+        rgba(233,237,245,.08);
+    }
+    .btn.secondary{
+      background: rgba(233,237,245,.05);
+    }
+
+    /* Sections */
+    section{ padding:88px 0; }
+    .sectionHead{
+      display:flex; flex-direction:column; gap:12px;
+      margin-bottom:28px;
+    }
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border:1px solid rgba(233,237,245,.10);
+      border-radius:999px;
+      background: rgba(255,255,255,.03);
+      color: var(--muted);
+      font-size:13px;
+      letter-spacing:.2px;
+      width:max-content;
+    }
+    h1,h2{
+      margin:0;
+      letter-spacing:-.02em;
+    }
+    h1{
+      font-size:56px; line-height:1.04; font-weight:770;
+    }
+    h2{
+      font-size:34px; line-height:1.12; font-weight:760;
+    }
+    p{ margin:0; color:var(--muted); line-height:1.6; }
+    .fine{ color:var(--muted2); font-size:13px; letter-spacing:.1px; }
+
+    /* Reveal on scroll */
+    .reveal{
+      opacity:0; transform: translateY(14px);
+      transition: opacity .55s ease, transform .55s ease;
+      will-change: opacity, transform;
+    }
+    .reveal.in{
+      opacity:1; transform: translateY(0);
+    }
+
+    /* HERO */
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.08fr .92fr;
+      gap:48px;
+      align-items:center;
+    }
+    .heroSub{
+      font-size:18px;
+      max-width:56ch;
+      margin-top:14px;
+    }
+    .heroLine{
+      margin-top:18px;
+      color:var(--muted2);
+      font-size:14px;
+    }
+    .heroActions{
+      display:flex; gap:14px; flex-wrap:wrap;
+      margin-top:28px;
+    }
+
+    /* UI Mock */
+    .mock{
+      position:relative;
+      border-radius: var(--r);
+      border:1px solid rgba(233,237,245,.10);
+      background:
+        radial-gradient(900px 340px at 30% 20%, rgba(120,180,255,.12), transparent 55%),
+        radial-gradient(800px 320px at 70% 90%, rgba(140,255,210,.10), transparent 55%),
+        rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      padding:18px;
+      transform: translateZ(0);
+    }
+    .mock::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(650px 320px at 65% 25%, rgba(120,180,255,.14), transparent 60%);
+      opacity:.9;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .mockTop{
+      display:flex; align-items:center; justify-content:space-between;
+      padding:10px 10px 18px;
+      position:relative; z-index:1;
+    }
+    .pill{
+      padding:8px 10px;
+      border:1px solid rgba(233,237,245,.10);
+      border-radius:999px;
+      color:var(--muted);
+      font-size:12px;
+      background: rgba(255,255,255,.02);
+    }
+    .grid{
+      position:relative; z-index:1;
+      display:grid; gap:14px;
+    }
+    .row{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+    .card{
+      border-radius: var(--r2);
+      border:1px solid rgba(233,237,245,.09);
+      background: rgba(0,0,0,.20);
+      padding:14px;
+      min-height:120px;
+    }
+    .label{
+      font-size:12px;
+      color:var(--muted2);
+      letter-spacing:.2px;
+      margin-bottom:10px;
+    }
+    .big{
+      display:flex; align-items:baseline; gap:8px;
+      font-weight:790;
+      font-size:26px;
+      letter-spacing:-.01em;
+    }
+    .big span{
+      font-size:12px;
+      color:var(--muted2);
+      font-weight:650;
+      letter-spacing:.2px;
+    }
+   .rings{
+  display: flex;
+  gap: 12px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+/* Base ring */
+.ring{
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  /* Start at 0 */
+  --fill: 0%;
+
+  background: conic-gradient(
+    from 180deg,
+    rgba(120,180,255,.92) var(--fill),
+    rgba(233,237,245,.08) 0
+  );
+
+  mask: radial-gradient(circle, transparent 58%, #000 59%);
+  box-shadow: 0 0 24px rgba(120,180,255,.18);
+
+  /* One-time animation */
+  animation: fillRing 900ms ease-out forwards;
+}
+
+/* Secondary ring */
+.ring.alt{
+  background: conic-gradient(
+    from 180deg,
+    rgba(140,255,210,.82) var(--fill),
+    rgba(233,237,245,.08) 0
+  );
+
+  box-shadow: 0 0 24px rgba(140,255,210,.14);
+}
+
+@property --fill {
+  syntax: '<percentage>';
+  inherits: false;
+  initial-value: 0%;
+}
+
+/* Animation */
+@keyframes fillRing {
+  from {
+    --fill: 0%;
+  }
+  to {
+    --fill: var(--p);
+  }
+}
+
+    @keyframes slowSpin{ 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+    .streak{
+      display:flex; justify-content:space-between; align-items:center;
+      margin-top:12px; padding-top:10px;
+      border-top:1px solid rgba(233,237,245,.08);
+      color:var(--muted);
+      font-size:13px;
+    }
+    .streak b{ color:rgba(233,237,245,.9); font-weight:800; }
+    .buckets{ display:flex; flex-direction:column; gap:10px; margin-top:10px; }
+    .bucket{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 10px;
+      border:1px solid rgba(233,237,245,.08);
+      border-radius:14px;
+      background: rgba(255,255,255,.02);
+      color:rgba(233,237,245,.80);
+      font-size:13px;
+    }
+    .bar{
+      height:6px; width:120px;
+      border-radius:999px;
+      background: rgba(233,237,245,.08);
+      overflow:hidden;
+      margin-left:12px;
+    }
+    .bar > i{
+      display:block; height:100%;
+      width: var(--w,55%);
+      background: linear-gradient(90deg, rgba(120,180,255,.85), rgba(140,255,210,.72));
+      border-radius:999px;
+      animation: breathe 2.8s ease-in-out infinite;
+    }
+    @keyframes breathe{ 0%,100%{opacity:.85} 50%{opacity:1} }
+
+    /* PROBLEM */
+    .split{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:40px;
+      align-items:start;
+    }
+    .ghostPanel{
+      border:1px solid rgba(233,237,245,.08);
+      border-radius: var(--r);
+      background: rgba(255,255,255,.02);
+      padding:22px;
+      min-height:320px;
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    .ghostPanel::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(600px 260px at 20% 30%, rgba(255,255,255,.06), transparent 60%),
+        radial-gradient(700px 320px at 80% 80%, rgba(120,180,255,.08), transparent 60%);
+      opacity:.9;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .chaosList{
+      position:relative; z-index:1;
+      display:grid; gap:12px;
+      margin-top:10px;
+    }
+    .chaosItem{
+      border:1px solid rgba(233,237,245,.08);
+      border-radius:14px;
+      background: rgba(0,0,0,.18);
+      padding:12px 12px;
+      display:flex; align-items:center; justify-content:space-between;
+      color:rgba(233,237,245,.78);
+      font-size:13px;
+    }
+    .tag{
+      font-size:12px;
+      color:rgba(233,237,245,.55);
+      border:1px solid rgba(233,237,245,.10);
+      padding:6px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.02);
+      letter-spacing:.1px;
+    }
+    .truths{
+      display:flex; flex-direction:column; gap:14px;
+      margin-top:6px;
+    }
+    .truth{
+      padding:18px 18px;
+      border-radius: var(--r2);
+      border:1px solid rgba(233,237,245,.08);
+      background: rgba(0,0,0,.18);
+      color:rgba(233,237,245,.86);
+      font-size:18px;
+      letter-spacing:-.01em;
+      line-height:1.35;
+    }
+
+    /* SOLUTION */
+    .capGrid{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .cap{
+      border-radius: var(--r2);
+      border:1px solid rgba(233,237,245,.09);
+      background: rgba(255,255,255,.02);
+      padding:16px;
+      box-shadow: var(--shadow2);
+      transform: translateY(0);
+      transition: transform .22s ease, border-color .22s ease, background .22s ease;
+      min-height:120px;
+    }
+    .cap:hover{
+      transform: translateY(-2px);
+      border-color: rgba(233,237,245,.14);
+      background: rgba(255,255,255,.03);
+    }
+    .cap h3{
+      margin:0 0 8px;
+      font-size:14px;
+      letter-spacing:.1px;
+      color:rgba(233,237,245,.88);
+    }
+    .cap p{ font-size:13px; color:var(--muted); }
+
+    .pulseBadge{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid rgba(233,237,245,.10);
+      background: radial-gradient(220px 90px at 30% 30%, rgba(120,180,255,.12), transparent 60%), rgba(255,255,255,.02);
+      color:rgba(233,237,245,.78);
+      width:max-content;
+    }
+    .pulseOrb{
+      width:12px; height:12px; border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.95), rgba(140,255,210,.40));
+      box-shadow: 0 0 22px rgba(140,255,210,.35);
+    }
+
+    /* HOW IT WORKS */
+    .steps{
+      display:grid; gap:14px;
+      margin-top:18px;
+    }
+    .step{
+      display:grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap:16px;
+      border-radius: var(--r);
+      border:1px solid rgba(233,237,245,.09);
+      background: rgba(0,0,0,.18);
+      padding:18px;
+    }
+    .miniMock{
+      border-radius: var(--r2);
+      border:1px solid rgba(233,237,245,.08);
+      background:
+        radial-gradient(520px 220px at 30% 25%, rgba(120,180,255,.10), transparent 62%),
+        rgba(255,255,255,.02);
+      min-height:140px;
+      padding:14px;
+      box-shadow: var(--shadow2);
+    }
+    .miniRow{ display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; color:rgba(233,237,245,.72); font-size:12px; }
+    .miniLine{
+      height:10px; border-radius:999px;
+      background: rgba(233,237,245,.07);
+      overflow:hidden;
+    }
+    .miniLine > i{
+      display:block; height:100%;
+      width: var(--w,50%);
+      background: linear-gradient(90deg, rgba(120,180,255,.75), rgba(255,255,255,.10));
+      border-radius:999px;
+      opacity:.9;
+      animation: breathe 3.2s ease-in-out infinite;
+    }
+    .stepText h3{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:-.01em;
+      color:rgba(233,237,245,.92);
+      font-weight:770;
+    }
+    .stepText p{ font-size:14px; }
+
+    /* CORE FEATURES (depth without noise) */
+    .featureGrid{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .feature{
+      border-radius: var(--r);
+      border:1px solid rgba(233,237,245,.09);
+      background: rgba(255,255,255,.02);
+      padding:18px;
+      box-shadow: var(--shadow2);
+      min-height:210px;
+      overflow:hidden;
+      position:relative;
+    }
+    .feature::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(520px 280px at 25% 15%, rgba(120,180,255,.10), transparent 60%);
+      opacity:.75;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .feature h3{
+      margin:0 0 8px;
+      font-size:16px;
+      font-weight:780;
+      position:relative; z-index:1;
+    }
+    .feature p{ position:relative; z-index:1; font-size:14px; color:var(--muted); }
+    .miniBuckets{
+      position:relative; z-index:1;
+      display:grid; gap:10px; margin-top:14px;
+    }
+    .miniBucket{
+      display:flex; justify-content:space-between; align-items:center;
+      padding:10px 10px;
+      border:1px solid rgba(233,237,245,.08);
+      border-radius:14px;
+      background: rgba(0,0,0,.16);
+      color:rgba(233,237,245,.78);
+      font-size:13px;
+    }
+    .miniStat{
+      position:relative; z-index:1;
+      margin-top:14px;
+      border:1px solid rgba(233,237,245,.08);
+      border-radius:14px;
+      background: rgba(0,0,0,.16);
+      padding:12px;
+      color:rgba(233,237,245,.78);
+      font-size:13px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .chip{
+      display:inline-flex; width:max-content;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(233,237,245,.10);
+      background: rgba(255,255,255,.02);
+      color:rgba(233,237,245,.64);
+      font-size:12px;
+    }
+    .streakBox{
+      position:relative; z-index:1;
+      margin-top:14px;
+      border:1px solid rgba(233,237,245,.08);
+      border-radius:14px;
+      background: rgba(0,0,0,.16);
+      padding:14px;
+      display:flex; align-items:center; justify-content:space-between;
+    }
+    .streakNum{
+      font-weight:820;
+      font-size:28px;
+      letter-spacing:-.02em;
+    }
+
+    /* DIFFERENT */
+    .compare{
+      border:1px solid rgba(233,237,245,.09);
+      border-radius: var(--r);
+      background: rgba(255,255,255,.02);
+      overflow:hidden;
+      box-shadow: var(--shadow2);
+      margin-top:18px;
+    }
+    .compareHeader{
+      display:grid; grid-template-columns: 1.1fr 1fr 1fr;
+      padding:16px 18px;
+      border-bottom:1px solid rgba(233,237,245,.07);
+      color:rgba(233,237,245,.78);
+      font-size:13px;
+    }
+    .compareRow{
+      display:grid; grid-template-columns: 1.1fr 1fr 1fr;
+      padding:16px 18px;
+      border-bottom:1px solid rgba(233,237,245,.06);
+      align-items:center;
+      color:rgba(233,237,245,.78);
+    }
+    .compareRow:last-child{ border-bottom:none; }
+    .compare .fintraCol{
+      background: radial-gradient(520px 220px at 30% 40%, rgba(120,180,255,.10), transparent 60%);
+      border-left:1px solid rgba(233,237,245,.06);
+      border-right:1px solid rgba(233,237,245,.06);
+      padding:10px 12px;
+      border-radius:14px;
+      color:rgba(233,237,245,.86);
+    }
+    .compare .typCol{
+      color:rgba(233,237,245,.62);
+    }
+    .compare .labelCol{
+      color:rgba(233,237,245,.80);
+      font-weight:650;
+    }
+
+    /* WHO IT'S FOR */
+    .profiles{
+      display:grid; grid-template-columns: repeat(3,1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .profile{
+      border-radius: var(--r);
+      border:1px solid rgba(233,237,245,.09);
+      background: rgba(0,0,0,.18);
+      padding:18px;
+      box-shadow: var(--shadow2);
+      min-height:150px;
+    }
+    .sil{
+      width:42px; height:42px;
+      border-radius:16px;
+      border:1px solid rgba(233,237,245,.10);
+      background:
+        radial-gradient(220px 100px at 30% 30%, rgba(140,255,210,.12), transparent 60%),
+        rgba(255,255,255,.02);
+      box-shadow: 0 0 30px rgba(140,255,210,.09);
+      margin-bottom:12px;
+    }
+    .profile h3{ margin:0 0 8px; font-size:15px; font-weight:780; color:rgba(233,237,245,.9); }
+    .profile p{ font-size:14px; }
+
+    /* FOUNDER */
+    .founder{
+      display:grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap:22px;
+      align-items:center;
+      margin-top:18px;
+      padding:18px;
+      border-radius: var(--r);
+      border:1px solid rgba(233,237,245,.09);
+      background: rgba(255,255,255,.02);
+      box-shadow: var(--shadow2);
+    }
+    .photo{
+      border-radius: var(--r);
+      border:1px solid rgba(233,237,245,.08);
+      background:
+        radial-gradient(520px 260px at 40% 25%, rgba(255,255,255,.06), transparent 60%),
+        rgba(0,0,0,.22);
+      min-height:220px;
+      position:relative;
+      overflow:hidden;
+    }
+    .photo::after{
+      content:"Founder photo (replace)";
+      position:absolute; bottom:14px; left:14px;
+      color:rgba(233,237,245,.52);
+      font-size:12px;
+      border:1px solid rgba(233,237,245,.10);
+      padding:8px 10px;
+      border-radius:999px;
+      background: rgba(255,255,255,.02);
+    }
+
+    /* SOCIAL PROOF */
+    .signals{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      margin-top:18px;
+    }
+    .signal{
+      border-radius: var(--r);
+      border:1px solid rgba(233,237,245,.09);
+      background: rgba(0,0,0,.18);
+      padding:18px;
+      box-shadow: var(--shadow2);
+    }
+    .num{
+      font-size:34px;
+      font-weight:820;
+      letter-spacing:-.02em;
+      color:rgba(233,237,245,.92);
+      margin-bottom:6px;
+    }
+    .signal p{ font-size:14px; }
+
+    /* FINAL CTA */
+    .cta{
+      padding:70px 0 84px;
+    }
+    .ctaBox{
+      border-radius: 28px;
+      border:1px solid rgba(233,237,245,.10);
+      background:
+        radial-gradient(900px 360px at 30% 30%, rgba(120,180,255,.12), transparent 60%),
+        radial-gradient(900px 360px at 70% 90%, rgba(140,255,210,.10), transparent 60%),
+        rgba(255,255,255,.03);
+      box-shadow: var(--shadow);
+      padding:34px;
+      overflow:hidden;
+      position:relative;
+    }
+    .ctaBox::after{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 320px at 60% 10%, rgba(255,255,255,.06), transparent 60%);
+      opacity:.8;
+      filter: blur(18px);
+      pointer-events:none;
+    }
+    .ctaGrid{
+      position:relative; z-index:1;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:18px;
+      align-items:center;
+    }
+    .ctaGrid h2{ font-size:40px; }
+    .form{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .input{
+      min-width:260px;
+      flex:1;
+      padding:13px 14px;
+      border-radius:14px;
+      border:1px solid rgba(233,237,245,.10);
+      background: rgba(0,0,0,.22);
+      color:rgba(233,237,245,.92);
+      outline:none;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.15);
+    }
+    .input::placeholder{ color: rgba(233,237,245,.42); }
+    .secure{
+      margin-top:10px;
+      text-align:right;
+      color:rgba(233,237,245,.46);
+      font-size:12px;
+      letter-spacing:.1px;
+    }
+
+    /* Footer */
+    footer{
+      padding:28px 0 44px;
+      border-top:1px solid rgba(233,237,245,.06);
+      color:rgba(233,237,245,.62);
+      font-size:13px;
+    }
+    .foot{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:16px; flex-wrap:wrap;
+    }
+    .foot a{
+      padding:8px 10px;
+      border-radius:10px;
+      border:1px solid transparent;
+      color:rgba(233,237,245,.62);
+    }
+    .foot a:hover{
+      border-color: rgba(233,237,245,.08);
+      background: rgba(255,255,255,.02);
+      color: rgba(233,237,245,.78);
+    }
+
+    /* Responsive */
+    @media (max-width: 980px){
+      h1{ font-size:46px; }
+      .heroGrid{ grid-template-columns: 1fr; }
+      .split{ grid-template-columns: 1fr; }
+      .capGrid{ grid-template-columns: 1fr 1fr; }
+      .step{ grid-template-columns: 1fr; }
+      .featureGrid{ grid-template-columns: 1fr; }
+      .profiles{ grid-template-columns: 1fr; }
+      .signals{ grid-template-columns: 1fr; }
+      .founder{ grid-template-columns: 1fr; }
+      .ctaGrid{ grid-template-columns: 1fr; }
+      .form{ justify-content:flex-start; }
+      .secure{ text-align:left; }
+      .navLinks{ display:none; }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .ring, .bar > i, .miniLine > i { animation:none !important; }
+      .reveal{ transition:none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- NAV -->
+  <div class="nav">
+    <div class="wrap navInner">
+      <div class="brand"><span class="dot"></span> FinTra</div>
+      <div class="navLinks" aria-label="Navigation">
+        <a href="#problem">Problem</a>
+        <a href="#solution">Solution</a>
+        <a href="#how">How it works</a>
+        <a href="#features">Capabilities</a>
+        <a href="#different">Different</a>
+      </div>
+      <button class="btn primary" data-scroll="#final">Get Early Access</button>
+    </div>
+  </div>
+
+  <!-- 1. HERO -->
+ <!-- 1. HERO -->
+<section id="top">
+  <div class="wrap">
+    <div class="heroGrid">
+
+      <!-- Left: Message -->
+      <div class="reveal">
+        <div class="kicker">
+          <span class="dot"></span> Early Access
+        </div>
+
+        <h1>Your salary deserves a plan.</h1>
+
+        <p class="heroSub">
+          Most people react to money.<br/>
+          FinTra helps you <b style="color:rgba(233,237,245,.92); font-weight:800;">
+          decide before it disappears</b>.
+        </p>
+
+        <p class="heroLine">
+          No noise. No judgement. Just clarity you can act on.
+        </p>
+
+        <div class="heroActions">
+          <button class="btn primary" data-scroll="#final">
+            Get Early Access
+          </button>
+          <button class="btn secondary" data-scroll="#how">
+            See How It Works
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: UI Mock -->
+      <div class="mock reveal" aria-label="FinTra dashboard preview">
+        <div class="mockTop">
+          <div class="brand">
+            <span class="dot"></span> FinTra
+          </div>
+          <div class="pill">Dashboard</div>
+        </div>
+
+        <div class="grid">
+          <div class="row">
+            <!-- Allocation Card -->
+            <div class="card">
+              <div class="label">This month</div>
+              <div class="big">
+                ₹18,420
+                <span>allocated</span>
+              </div>
+
+              <div class="rings">
+                <div class="ring" style="--p:42%"></div>
+                <div class="ring alt" style="--p:63%"></div>
+              </div>
+
+              <div class="streak">
+                <span>Discipline streak</span>
+                <span><b id="streak">7</b> days</span>
+              </div>
+            </div>
+
+            <!-- Buckets -->
+            <div class="card">
+              <div class="label">Savings buckets</div>
+
+              <div class="buckets">
+                <div class="bucket">
+                  <span>Savings</span>
+                  <span style="display:flex;align-items:center;gap:10px;">
+                    <b>₹6,000</b>
+                    <span class="bar" style="--w:52%"><i></i></span>
+                  </span>
+                </div>
+
+                <div class="bucket">
+                  <span>Goa Trip</span>
+                  <span style="display:flex;align-items:center;gap:10px;">
+                    <b>₹3,200</b>
+                    <span class="bar" style="--w:38%"><i></i></span>
+                  </span>
+                </div>
+
+                <div class="bucket">
+                  <span>MacBook</span>
+                  <span style="display:flex;align-items:center;gap:10px;">
+                    <b>₹9,500</b>
+                    <span class="bar" style="--w:70%"><i></i></span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Insight Strip -->
+          <div class="card" style="min-height:auto;">
+            <div class="label">Calm insights</div>
+            <div style="
+              display:flex;
+              gap:14px;
+              flex-wrap:wrap;
+              color:rgba(233,237,245,.78);
+              font-size:13px;
+            ">
+              <div style="flex:1;min-width:180px;">
+                <b style="color:rgba(233,237,245,.9);">Today:</b>
+                spending stayed inside plan.
+              </div>
+
+              <div style="flex:1;min-width:180px;">
+                <b style="color:rgba(233,237,245,.9);">Pattern:</b>
+                late-night spikes detected.
+              </div>
+
+              <div style="flex:1;min-width:180px;">
+                <b style="color:rgba(233,237,245,.9);">Next:</b>
+                nudge at 10:30pm.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer line -->
+    <div class="fine reveal" style="margin-top:20px;">
+      A quiet system for people who take money seriously.
+    </div>
+  </div>
+</section>
+
+
+  <!-- 2. PROBLEM -->
+  <section id="problem">
+  <div class="wrap">
+    <div class="sectionHead reveal">
+      <div class="kicker">Why Smart Earners Still Feel Broke</div>
+      <h2>Good salary. Zero clarity.</h2>
+      <p>Blunt truth: most people don’t have a money problem.<br/>They have a <b style="font-weight:800;">clarity problem</b>.</p>
+    </div>
+
+    <div class="split">
+      <!-- Left: Chaotic Expense Feed -->
+      <div class="ghostPanel reveal" style="position:relative; overflow:hidden;">
+        <div class="label" style="position:relative; z-index:2; margin-bottom:16px;">The noisy reality</div>
+        
+        <!-- Scrolling-like transaction feed -->
+        <div style="position:relative; z-index:1; display:grid; gap:10px; padding-right:8px;">
+          <div class="chaosItem" style="opacity:0.95; transform: translateX(4px);">
+            <span>Swiggy • Food delivery</span>
+            <span class="tag" style="background:rgba(255,100,100,.12); color:rgba(255,140,140,.9); border-color:rgba(255,100,100,.2);">₹ 640</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.88;">
+            <span>Netflix (forgot to cancel)</span>
+            <span class="tag">₹ 649</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.92; transform: translateX(-3px);">
+            <span>Amazon • Impulse gadget</span>
+            <span class="tag" style="background:rgba(255,100,100,.12); color:rgba(255,140,140,.9); border-color:rgba(255,100,100,.2);">₹ 1,250</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.85;">
+            <span>Zomato • Late night</span>
+            <span class="tag" style="background:rgba(255,100,100,.12); color:rgba(255,140,140,.9); border-color:rgba(255,100,100,.2);">₹ 520</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.9;">
+            <span>Spotify Premium</span>
+            <span class="tag">₹ 119</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.82; transform: translateX(2px);">
+            <span>Uber • Weekend ride</span>
+            <span class="tag">₹ 380</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.78;">
+            <span>“I’ll save next month”</span>
+            <span class="tag" style="background:rgba(255,180,100,.12); color:rgba(255,200,120,.9); border-color:rgba(255,180,100,.2);">pattern</span>
+          </div>
+          <div class="chaosItem" style="opacity:0.75;">
+            <span>Checking balance... after it's gone</span>
+            <span class="tag" style="background:rgba(255,100,100,.12); color:rgba(255,140,140,.9); border-color:rgba(255,100,100,.2);">late</span>
+          </div>
+        </div>
+
+        <!-- Subtle blur overlay for depth -->
+        <div style="position:absolute; inset:0; backdrop-filter:blur(4px); pointer-events:none; opacity:0.15;"></div>
+      </div>
+
+      <!-- Right: Calm Truths -->
+      <div class="truths">
+        <div class="truth reveal" style="font-size:22px; padding:24px; text-align:center;">
+          Money flows in.<br/>
+          <span style="opacity:0.7;">But where does it go?</span>
+        </div>
+        <div class="truth reveal" style="font-size:20px; padding:24px; text-align:center; opacity:0.9;">
+          Savings?<br/>
+          <span style="opacity:0.7;">Left to luck and leftovers.</span>
+        </div>
+        <div class="truth reveal" style="font-size:20px; padding:24px; text-align:center; opacity:0.9;">
+          Most apps?<br/>
+          <span style="opacity:0.7;">They track. They judge.<br/>They don’t guide.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="fine reveal" style="margin-top:40px; text-align:center; max-width:720px; margin-left:auto; margin-right:auto;">
+      You’re not bad with money.<br/>
+      You’re just using a system that wasn’t built for real human behavior.
+    </div>
+  </div>
+</section>
+
+  <!-- 3. SOLUTION -->
+  <section id="solution">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="pulseBadge"><span class="pulseOrb"></span> Pulse — an AI companion energy (not a cartoon)</div>
+        <h2>Meet Your Money Brain</h2>
+        <p>
+          FinTra doesn’t just log transactions.<br/>
+          It <b style="color:rgba(233,237,245,.9)">thinks alongside you</b>.
+        </p>
+      </div>
+
+      <div class="capGrid">
+        <div class="cap reveal">
+          <h3>Salary-day allocation</h3>
+          <p>Clarity before spending starts. Your money gets direction — immediately.</p>
+        </div>
+        <div class="cap reveal">
+          <h3>Behavioural nudges</h3>
+          <p>Patterns over guilt. FinTra notices when you drift — and brings you back.</p>
+        </div>
+        <div class="cap reveal">
+          <h3>Goal-linked savings</h3>
+          <p>Saving becomes a system. Buckets tied to intent, not vague “leftovers”.</p>
+        </div>
+        <div class="cap reveal">
+          <h3>Streak-driven discipline</h3>
+          <p>Quiet momentum. Not gamified nonsense — just consistent progress.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. HOW IT WORKS -->
+  <section id="how">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="kicker">How It Works</div>
+        <h2>A simple loop you can actually stick to</h2>
+        <p>Three steps. No overload. The system does the heavy lifting.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal">
+          <div class="miniMock">
+            <div class="miniRow"><span>Step 1</span><span>Allocation</span></div>
+            <div class="miniLine" style="--w:72%"><i style="--w:72%"></i></div>
+            <div class="miniRow" style="margin-top:12px;"><span>Needs</span><span>45%</span></div>
+            <div class="miniLine"><i style="--w:45%"></i></div>
+            <div class="miniRow" style="margin-top:10px;"><span>Savings</span><span>30%</span></div>
+            <div class="miniLine"><i style="--w:30%"></i></div>
+          </div>
+          <div class="stepText">
+            <h3>Step 1: Salary Arrives</h3>
+            <p>FinTra helps you allocate before spending starts.</p>
+          </div>
+        </div>
+
+        <div class="step reveal">
+          <div class="miniMock">
+            <div class="miniRow"><span>Step 2</span><span>Observation</span></div>
+            <div class="miniRow" style="margin-top:8px;"><span>Night spending</span><span>high</span></div>
+            <div class="miniLine"><i style="--w:68%"></i></div>
+            <div class="miniRow" style="margin-top:10px;"><span>Weekend spikes</span><span>medium</span></div>
+            <div class="miniLine"><i style="--w:44%"></i></div>
+          </div>
+          <div class="stepText">
+            <h3>Step 2: You Spend</h3>
+            <p>FinTra observes patterns — not just amounts.</p>
+          </div>
+        </div>
+
+        <div class="step reveal">
+          <div class="miniMock">
+            <div class="miniRow"><span>Step 3</span><span>Guidance</span></div>
+            <div class="chip">Nudge: “You drift late-night. Set a rule at 10:30pm.”</div>
+            <div class="miniRow" style="margin-top:12px;"><span>Streak</span><span>+1</span></div>
+            <div class="miniLine"><i style="--w:52%"></i></div>
+          </div>
+          <div class="stepText">
+            <h3>Step 3: You Improve</h3>
+            <p>Nudges, streaks, and insights guide better decisions.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CORE FEATURES -->
+  <section id="features">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="kicker">Core Capabilities</div>
+        <h2>Depth without noise</h2>
+        <p>Each capability gets space. Nothing is dumped on you.</p>
+      </div>
+
+      <div class="featureGrid">
+        <div class="feature reveal">
+          <h3>Savings Buckets</h3>
+          <p>Buckets with intent. Visual progress you can feel.</p>
+          <div class="miniBuckets">
+            <div class="miniBucket">
+              <span>Goa Trip</span>
+              <span style="display:flex;align-items:center;gap:10px;">
+                ₹<b>3,200</b><span class="bar" style="--w:38%"><i></i></span>
+              </span>
+            </div>
+            <div class="miniBucket">
+              <span>Emergency</span>
+              <span style="display:flex;align-items:center;gap:10px;">
+                ₹<b>6,000</b><span class="bar" style="--w:52%"><i></i></span>
+              </span>
+            </div>
+            <div class="miniBucket">
+              <span>MacBook</span>
+              <span style="display:flex;align-items:center;gap:10px;">
+                ₹<b>9,500</b><span class="bar" style="--w:70%"><i></i></span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature reveal">
+          <h3>Behavioural Insights</h3>
+          <p>Clear signals. One insight you can act on — not a wall of charts.</p>
+          <div class="miniStat">
+            <span class="chip">Insight</span>
+            <div style="font-size:14px;color:rgba(233,237,245,.86);line-height:1.4;">
+              “You overspend late at night.”
+            </div>
+            <div class="miniRow" style="margin:0; color:rgba(233,237,245,.64);">
+              <span>Late-night spend</span><span>↑</span>
+            </div>
+            <div class="miniLine"><i style="--w:66%"></i></div>
+          </div>
+        </div>
+
+        <div class="feature reveal">
+          <h3>Streaks</h3>
+          <p>Discipline without shame. Quiet progress that builds identity.</p>
+          <div class="streakBox">
+            <div>
+              <div class="label" style="margin:0 0 8px;">Current streak</div>
+              <div class="fine">Stayed inside plan</div>
+            </div>
+            <div class="streakNum"><span id="streak2">7</span></div>
+          </div>
+          <div class="fine" style="margin-top:12px;">No fireworks. No confetti. Just momentum.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. WHY DIFFERENT -->
+  <section id="different">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="kicker">Why FinTra Is Different</div>
+        <h2>This isn’t another budgeting app</h2>
+        <p>FinTra is proactive, behaviour-first, and built for action clarity.</p>
+      </div>
+
+      <div class="compare reveal" role="table" aria-label="Comparison">
+        <div class="compareHeader" role="rowgroup">
+          <div class="labelCol" role="columnheader">Approach</div>
+          <div class="typCol" role="columnheader">Typical finance apps</div>
+          <div class="fintraCol" role="columnheader">FinTra</div>
+        </div>
+
+        <div class="compareRow" role="row">
+          <div class="labelCol">Timing</div>
+          <div class="typCol">Reactive (after spend)</div>
+          <div class="fintraCol">Proactive (before spend)</div>
+        </div>
+
+        <div class="compareRow" role="row">
+          <div class="labelCol">Tone</div>
+          <div class="typCol">Guilt-driven</div>
+          <div class="fintraCol">Behaviour-driven</div>
+        </div>
+
+        <div class="compareRow" role="row">
+          <div class="labelCol">Experience</div>
+          <div class="typCol">Data overload</div>
+          <div class="fintraCol">Action clarity</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. WHO IT’S FOR -->
+  <section id="who">
+    <div class="wrap">
+      <div class="sectionHead reveal">
+        <div class="kicker">Who It’s For</div>
+        <h2>Precision targeting</h2>
+        <p>If your income grew but clarity didn’t — FinTra is for you.</p>
+      </div>
+
+      <div class="profiles">
+        <div class="profile reveal">
+          <div class="sil"></div>
+          <h3>First-job professionals</h3>
+          <p>Money is new. Chaos is easy. FinTra gives you a system early.</p>
+        </div>
+        <div class="profile reveal">
+          <div class="sil"></div>
+          <h3>Founders & freelancers</h3>
+          <p>Irregular months need structure. FinTra keeps decisions clean.</p>
+        </div>
+        <div class="profile reveal">
+          <div class="sil"></div>
+          <h3>Anyone tired of “where did it go?”</h3>
+          <p>Not broke. Just untracked. FinTra turns the fog into clarity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FOUNDER -->
+   <section id="founder">
+  <div class="wrap">
+
+    <div class="quoteWrap reveal">
+
+      <style>
+        /* Scoped newspaper-style quote */
+        #founder .quoteWrap{
+          max-width: 720px;
+          margin: 0 auto;
+          text-align: center;
+          padding: 40px 0;
+          display: flex;
+          flex-direction: column;
+          gap: 18px;
+        }
+
+        #founder .quoteMark{
+          font-size: 64px;
+          line-height: 1;
+          font-weight: 800;
+          color: rgba(233,237,245,.18);
+          margin-bottom: -10px;
+          user-select: none;
+        }
+
+        #founder .quoteText{
+          margin: 0;
+          font-size: 28px;
+          font-weight: 760;
+          letter-spacing: -0.01em;
+          line-height: 1.25;
+          color: rgba(233,237,245,.92);
+        }
+
+        #founder .quoteSub{
+          font-size: 15px;
+          line-height: 1.6;
+          color: rgba(233,237,245,.68);
+          max-width: 58ch;
+          margin: 0 auto;
+        }
+
+        #founder .quoteBy{
+          margin-top: 6px;
+          font-size: 13px;
+          letter-spacing: 0.3px;
+          text-transform: uppercase;
+          color: rgba(233,237,245,.46);
+        }
+
+        @media (max-width: 640px){
+          #founder .quoteText{
+            font-size: 24px;
+          }
+        }
+      </style>
+
+      <div class="quoteMark">“</div>
+
+      <blockquote class="quoteText">
+        I built FinTra because I needed it.
+      </blockquote>
+
+      <div class="quoteSub">
+        Not a bank. Not a corporation.<br/>
+        Just a system I wish existed when my salary hit and clarity didn’t.
+      </div>
+
+      <div class="quoteBy">
+        — Founder, FinTra
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+  <!-- 10. FINAL CTA -->
+  <section id="final" class="cta">
+    <div class="wrap">
+      <div class="ctaBox reveal">
+        <div class="ctaGrid">
+          <div>
+            <h2>Stop reacting to money.<br/>Start directing it.</h2>
+            <p style="margin-top:10px; max-width:60ch;">
+              Join early access. Be part of the first group shaping FinTra’s money-brain experience.
+            </p>
+          </div>
+
+          <div>
+            <form class="form" id="waitlistForm">
+              <input class="input" type="email" name="email" placeholder="Email address" required autocomplete="email" />
+              <button class="btn primary" type="submit">Join Early Access</button>
+            </form>
+            <div class="secure">Secure. Minimal. No spam.</div>
+            <div class="fine" id="formMsg" style="margin-top:10px; display:none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. FOOTER -->
+  <footer>
+    <div class="wrap foot">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <span class="dot"></span> <span>FinTra</span>
+        <span style="opacity:.55;">© <span id="year"></span></span>
+      </div>
+      <!-- 
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <a href="#" onclick="return false;">Privacy</a>
+        <a href="#" onclick="return false;">Terms</a>
+        <a href="#" onclick="return false;">Contact</a>
+        </div> 
+      -->
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll
+    document.querySelectorAll("[data-scroll]").forEach(el=>{
+      el.addEventListener("click", ()=>{
+        const id = el.getAttribute("data-scroll");
+        const target = document.querySelector(id);
+        if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
+      });
+    });
+
+    // Reveal on scroll
+    const revealEls = Array.from(document.querySelectorAll(".reveal"));
+    const io = new IntersectionObserver(entries=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("in");
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el=>io.observe(el));
+
+    // Calm ticking numbers in hero mock (not loud, not casino)
+    const spentEl = document.getElementById('spent');
+    const streakEl = document.getElementById('streak');
+    const streak2El = document.getElementById('streak2');
+
+    function parseNum(s){ return Number(String(s).replace(/,/g,'')); }
+    function fmt(n){ return n.toLocaleString('en-IN'); }
+
+    let spent = parseNum(spentEl.textContent);
+    let streak = parseNum(streakEl.textContent);
+
+    setInterval(() => {
+      const delta = Math.floor(Math.random() * 18); // 0..17
+      spent += delta;
+      spentEl.textContent = fmt(spent);
+
+      // Keep streak stable. Rare increment.
+      if (Math.random() < 0.015) {
+        streak += 1;
+        streakEl.textContent = String(streak);
+        streak2El.textContent = String(streak);
+      }
+    }, 1400);
+
+    // Count-up for early signals when visible
+    const counters = document.querySelectorAll("[data-count]");
+    const countIO = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = Number(el.getAttribute("data-count"));
+        const duration = 900;
+        const start = performance.now();
+        const from = 0;
+
+        function tick(now){
+          const t = Math.min(1, (now - start) / duration);
+          const val = Math.floor(from + (target - from) * (t));
+          el.textContent = val.toLocaleString("en-IN");
+          if(t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        countIO.unobserve(el);
+      });
+    }, {threshold:0.25});
+    counters.forEach(c=>countIO.observe(c));
+
+    // Waitlist form (front-end only; hook to backend later)
+    const form = document.getElementById("waitlistForm");
+    const msg = document.getElementById("formMsg");
+
+   form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  const email = new FormData(form).get("email");
+  const button = form.querySelector("button");
+
+  // Basic validation
+  if (!email || !email.includes("@")) {
+    msg.style.display = "block";
+    msg.style.color = "rgba(255,120,120,.85)";
+    msg.textContent = "Enter a valid email.";
+    return;
+  }
+
+  // Lock UI
+  button.disabled = true;
+  button.textContent = "Joining…";
+
+  try {
+    const res = await fetch(
+      "https://aesncvmhlgmdnmhwablm.supabase.co/functions/v1/waitlist",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email })
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error("Request failed");
+    }
+
+    msg.style.display = "block";
+    msg.style.color = "rgba(140,255,210,.72)";
+    msg.textContent = "You're in. We'll email you when early access opens.";
+    form.reset();
+
+  } catch (err) {
+    msg.style.display = "block";
+    msg.style.color = "rgba(255,120,120,.85)";
+    msg.textContent = "Something went wrong. Try again.";
+  } finally {
+    button.disabled = false;
+    button.textContent = "Join Early Access";
+  }
+});
+
+
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
