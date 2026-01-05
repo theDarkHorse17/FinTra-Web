@@ -1,0 +1,111 @@
+---
+title: "PULSE — Your Personal Finance Co-Pilot"
+description: "What PULSE is, what it does, and how the full working flow runs inside FinTra."
+---
+
+import { Callout } from "@/components/Callout";
+
+# PULSE
+
+PULSE is FinTra’s in-app finance co-pilot — a system that watches user behavior (expenses, savings, streaks, goals) and outputs **clear signals**:
+
+- What changed?
+- Is it good or bad?
+- What should the user do next?
+- What reward/penalty should apply (streaks, tokens, nudges)?
+
+PULSE is not “chat for the sake of chat.” It’s **event-driven intelligence** designed to push the user toward consistency and better money habits.
+
+---
+
+## Core Principles
+
+1. **Event > Opinion**  
+   PULSE reacts to real actions (expense logged, savings deposited, missed day), not vague “tips.”
+
+2. **Signals, not walls of text**  
+   Every output should fit into:
+   - **Status** (what happened)
+   - **Impact** (why it matters)
+   - **Next step** (what to do now)
+
+3. **Trust first**  
+   If data is missing or uncertain, PULSE says so and defaults to the safest action.
+
+4. **Gamification is a tool, not the product**  
+   Streaks/tokens exist to reinforce behavior, not to distract.
+
+---
+
+## What PULSE Tracks
+
+### 1) Streaks
+A streak is the user’s **consistency chain** for a defined habit (example: logging expenses daily).
+
+Stored fields (typical):
+- `current_streak`
+- `longest_streak`
+- `last_action_date`
+- `streak_updated_at`
+
+Rules (example):
+- If `current_date - last_action_date >= 2` → streak is **broken**
+- If `current_date - last_action_date == 1` → streak is **at risk**
+- If `current_date - last_action_date == 0` → streak is **safe / continued**
+
+### 2) Spending Oversight
+Detects:
+- Category limit breach
+- Overall overspend
+- Unusual spikes
+- Recurring spend patterns
+- Late-night spending patterns
+- Weekly trend direction
+- Burnout forecast (behavior patterns hinting future overspending)
+
+### 3) Goals
+Detects:
+- New goal added
+- Goal completed
+- Stagnant goal progress
+
+### 4) Savings / Automation
+If you run salary-to-savings automation:
+- Savings deposit triggered
+- Monthly table updates
+- Notifications for failures
+
+---
+
+## System Architecture (How It’s Built)
+
+PULSE is made of **Domain Engines**.  
+Each engine:
+- knows **one domain** (streaks, spending, goals, savings)
+- has **no UI knowledge**
+- outputs **structured signals**
+
+**UI/Frontend** is separate:
+- It only renders signals
+- It never re-implements logic
+
+---
+
+## PULSE Working Flow (End-to-End)
+
+```mermaid
+flowchart TD
+  A[User Action] --> B[Event Created]
+  B --> C[Domain Engine Runner]
+  C --> D1[Streak Engine]
+  C --> D2[Spending Oversight Engine]
+  C --> D3[Goal Engine]
+  C --> D4[Savings Automation Engine]
+  D1 --> E[Signals Produced]
+  D2 --> E
+  D3 --> E
+  D4 --> E
+  E --> F[Store Signals / Update Tables]
+  F --> G[Notify UI / Push / Inbox]
+  G --> H[User Sees PULSE Output]
+  H --> I[User Takes Next Action]
