@@ -793,23 +793,237 @@
 
 <body>
   <!-- NAV -->
+  <!-- FinTra Navigation -->
   <div class="nav">
-    <div class="wrap navInner">
-      <div class="brand"><span class="dot"></span> FinTra</div>
-      <div class="navLinks" aria-label="Navigation">
-        <a href="#problem">Problem</a>
-        <a href="#solution">Solution</a>
-        <a href="#how">How it works</a>
-        <a href="#features">Capabilities</a>
-        <a href="#different">Different</a>
-      </div>
-      <button class="btn primary" data-scroll="#final">Get Early Access</button>
+  <style>
+    .nav{
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: transparent;          /* FULL TRANSPARENCY */
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav .navInner{
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 0;
+    }
+
+    .nav .wrap{
+      padding-top: 0 !important;
+      padding-bottom: 0 !important;
+    }
+
+    .nav .brand{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      color: rgba(255,255,255,0.92);
+      user-select: none;
+      white-space: nowrap;
+    }
+
+    .nav .brand .dot{
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.95), rgba(255,255,255,0.1));
+      box-shadow:
+        0 0 0 4px rgba(255,255,255,0.05),
+        0 6px 22px rgba(255,255,255,0.08);
+      display: inline-block;
+    }
+
+    .nav .navLinks{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .nav .navLinks a{
+      text-decoration: none;
+      color: rgba(255,255,255,0.70);
+      font-weight: 560;
+      font-size: 14px;
+      padding: 9px 12px;
+      border-radius: 12px;
+      transition: transform .15s ease, color .15s ease, background .15s ease;
+      white-space: nowrap;
+    }
+
+    .nav .navLinks a:hover{
+      color: rgba(255,255,255,0.95);
+      background: rgba(255,255,255,0.05);
+      transform: translateY(-1px);
+    }
+
+    .nav .btn.primary{
+      cursor: pointer;
+      pointer-events: auto;
+      position: relative;
+      z-index: 1001;
+      white-space: nowrap;
+      height: 40px;
+      padding: 0 14px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: transparent;          /* stays transparent */
+    }
+
+    .nav .btn.primary:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.04);
+    }
+
+    /* Mobile */
+    @media (max-width: 860px){
+      .nav .navLinks{ display: none; }
+      .nav .navInner{ justify-content: space-between; }
+    }
+  </style>
+
+  <div class="wrap navInner">
+    <div class="brand"><span class="dot"></span> FinTra</div>
+
+    <div class="navLinks" aria-label="Navigation">
+      <a href="#problem">Problem</a>
+      <a href="#solution">Solution</a>
+      <a href="#how">How it works</a>
+      <a href="#features">Capabilities</a>
+      <a href="#different">Different</a>
     </div>
+
+    <button class="btn primary" data-scroll="#final" type="button">
+      Get Early Access
+    </button>
+  </div>
   </div>
 
+
+
+
+
   <!-- 1. HERO -->
- <!-- 1. HERO -->
-<section id="top">
+ <section id="top">
+  <style>
+    /* Fix hero + transparent sticky nav overlap */
+    #top{
+      padding-top: 84px; /* 64px nav height + breathing space */
+    }
+
+    /* Make hero grid feel premium and balanced */
+    #top .heroGrid{
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 26px;
+      align-items: center;
+    }
+
+    /* Better rhythm on smaller screens */
+    @media (max-width: 960px){
+      #top{ padding-top: 76px; }
+      #top .heroGrid{
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      #top .mock{ order: 2; }
+    }
+
+    /* Kicker polish (keeps your class name) */
+    #top .kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: rgba(233,237,245,.78);
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    #top h1{
+      margin: 0 0 14px 0;
+      line-height: 1.06;
+      letter-spacing: -0.6px;
+    }
+
+    #top .heroSub{
+      margin: 0 0 10px 0;
+      line-height: 1.55;
+      color: rgba(233,237,245,.78);
+      font-size: 16px;
+    }
+
+    #top .heroLine{
+      margin: 0 0 18px 0;
+      color: rgba(233,237,245,.66);
+      font-size: 14px;
+    }
+
+    #top .heroActions{
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* Mock container polish but still matches your design language */
+    #top .mock{
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.02);
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    #top .mockTop{
+      display:flex;
+      align-items:center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    #top .mockTop .brand{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-weight:700;
+      color: rgba(233,237,245,.9);
+    }
+
+    #top .mockTop .pill{
+      font-size: 12px;
+      font-weight: 650;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.10);
+      color: rgba(233,237,245,.72);
+      background: rgba(255,255,255,0.03);
+    }
+
+    #top .mock .grid{
+      padding: 14px;
+    }
+
+    /* Small polish for footer line */
+    #top .fine{
+      color: rgba(233,237,245,.62);
+    }
+  </style>
+
   <div class="wrap">
     <div class="heroGrid">
 
@@ -832,10 +1046,10 @@
         </p>
 
         <div class="heroActions">
-          <button class="btn primary" data-scroll="#final">
+          <button class="btn primary" data-scroll="#final" type="button">
             Get Early Access
           </button>
-          <button class="btn secondary" data-scroll="#how">
+          <button class="btn secondary" data-scroll="#how" type="button">
             See How It Works
           </button>
         </div>
@@ -855,8 +1069,10 @@
             <!-- Allocation Card -->
             <div class="card">
               <div class="label">This month</div>
+
+              <!-- ✅ Add spent id here so your JS never crashes -->
               <div class="big">
-                ₹18,420
+                ₹<span id="spent">18,420</span>
                 <span>allocated</span>
               </div>
 
@@ -928,17 +1144,21 @@
                 nudge at 10:30pm.
               </div>
             </div>
+
+            <!-- ✅ If you need streak2 for JS, keep it present (invisible, no UI change) -->
+            <span id="streak2" style="display:none">7</span>
           </div>
         </div>
       </div>
+
     </div>
 
-    <!-- Footer line -->
     <div class="fine reveal" style="margin-top:20px;">
       A quiet system for people who take money seriously.
     </div>
   </div>
-</section>
+  </section>
+
 
 
   <!-- 2. PROBLEM -->
@@ -1361,126 +1581,195 @@
     </div>
   </footer>
 
-  <script>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+  // ✅ Put your real values here
+  const SUPABASE_URL = "https://aesncvmhlgmdnmhwablm.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFlc25jdm1obGdtZG5taHdhYmxtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQzODc1NzgsImV4cCI6MjA1OTk2MzU3OH0.Eyv5iWyNU3l23St-bMXOyHkHLPn9uvPoLJIKSONjkTY";
+
+  // ✅ Use a different variable name to avoid shadowing the global `supabase`
+  const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // -----------------------------
     // Smooth scroll
-    document.querySelectorAll("[data-scroll]").forEach(el=>{
-      el.addEventListener("click", ()=>{
+    // -----------------------------
+    document.querySelectorAll("[data-scroll]").forEach((el) => {
+      el.addEventListener("click", () => {
         const id = el.getAttribute("data-scroll");
         const target = document.querySelector(id);
-        if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
       });
     });
 
+    // -----------------------------
     // Reveal on scroll
+    // -----------------------------
     const revealEls = Array.from(document.querySelectorAll(".reveal"));
-    const io = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting) e.target.classList.add("in");
-      });
-    }, { threshold: 0.12 });
-    revealEls.forEach(el=>io.observe(el));
+    if (revealEls.length) {
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) e.target.classList.add("in");
+          });
+        },
+        { threshold: 0.12 }
+      );
+      revealEls.forEach((el) => io.observe(el));
+    }
 
-    // Calm ticking numbers in hero mock (not loud, not casino)
-    const spentEl = document.getElementById('spent');
-    const streakEl = document.getElementById('streak');
-    const streak2El = document.getElementById('streak2');
+    // -----------------------------
+    // Calm ticking numbers in hero mock (NULL SAFE)
+    // -----------------------------
+    const spentEl = document.getElementById("spent");
+    const streakEl = document.getElementById("streak");
+    const streak2El = document.getElementById("streak2");
 
-    function parseNum(s){ return Number(String(s).replace(/,/g,'')); }
-    function fmt(n){ return n.toLocaleString('en-IN'); }
+    function parseNum(s) {
+      return Number(String(s ?? "").replace(/,/g, "")) || 0;
+    }
+    function fmt(n) {
+      return Number(n || 0).toLocaleString("en-IN");
+    }
 
-    let spent = parseNum(spentEl.textContent);
-    let streak = parseNum(streakEl.textContent);
+    if (spentEl && streakEl) {
+      let spent = parseNum(spentEl.textContent);
+      let streak = parseNum(streakEl.textContent);
 
-    setInterval(() => {
-      const delta = Math.floor(Math.random() * 18); // 0..17
-      spent += delta;
-      spentEl.textContent = fmt(spent);
+      setInterval(() => {
+        spent += Math.floor(Math.random() * 18); // 0..17
+        spentEl.textContent = fmt(spent);
 
-      // Keep streak stable. Rare increment.
-      if (Math.random() < 0.015) {
-        streak += 1;
-        streakEl.textContent = String(streak);
-        streak2El.textContent = String(streak);
-      }
-    }, 1400);
-
-    // Count-up for early signals when visible
-    const counters = document.querySelectorAll("[data-count]");
-    const countIO = new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(!entry.isIntersecting) return;
-        const el = entry.target;
-        const target = Number(el.getAttribute("data-count"));
-        const duration = 900;
-        const start = performance.now();
-        const from = 0;
-
-        function tick(now){
-          const t = Math.min(1, (now - start) / duration);
-          const val = Math.floor(from + (target - from) * (t));
-          el.textContent = val.toLocaleString("en-IN");
-          if(t < 1) requestAnimationFrame(tick);
+        // Rare increment
+        if (Math.random() < 0.015) {
+          streak += 1;
+          streakEl.textContent = String(streak);
+          if (streak2El) streak2El.textContent = String(streak);
         }
-        requestAnimationFrame(tick);
-        countIO.unobserve(el);
-      });
-    }, {threshold:0.25});
-    counters.forEach(c=>countIO.observe(c));
+      }, 1400);
+    } else {
+      // Not fatal — just means this page variant doesn't have the mock elements
+      console.warn("Hero mock counters not found (spent/streak). Skipping ticker.");
+    }
 
-    // Waitlist form (front-end only; hook to backend later)
+    // -----------------------------
+    // Count-up for early signals when visible (NULL SAFE)
+    // -----------------------------
+    const counters = document.querySelectorAll("[data-count]");
+    if (counters.length) {
+      const countIO = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+
+            const target = Number(el.getAttribute("data-count")) || 0;
+            const duration = 900;
+            const start = performance.now();
+            const from = 0;
+
+            function tick(now) {
+              const t = Math.min(1, (now - start) / duration);
+              const val = Math.floor(from + (target - from) * t);
+              el.textContent = val.toLocaleString("en-IN");
+              if (t < 1) requestAnimationFrame(tick);
+            }
+
+            requestAnimationFrame(tick);
+            countIO.unobserve(el);
+          });
+        },
+        { threshold: 0.25 }
+      );
+
+      counters.forEach((c) => countIO.observe(c));
+    }
+
+    // -----------------------------
+    // Waitlist form -> Supabase insert (NULL SAFE + better errors)
+    // -----------------------------
     const form = document.getElementById("waitlistForm");
     const msg = document.getElementById("formMsg");
 
-   form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+    if (form && msg) {
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-  const email = new FormData(form).get("email");
-  const button = form.querySelector("button");
+        const email = new FormData(form).get("email")?.toString().trim();
+        const button = form.querySelector("button");
 
-  // Basic validation
-  if (!email || !email.includes("@")) {
-    msg.style.display = "block";
-    msg.style.color = "rgba(255,120,120,.85)";
-    msg.textContent = "Enter a valid email.";
-    return;
-  }
+        if (!button) return;
 
-  // Lock UI
-  button.disabled = true;
-  button.textContent = "Joining…";
+        if (!email || !email.includes("@")) {
+          msg.style.display = "block";
+          msg.style.color = "rgba(255,120,120,.85)";
+          msg.textContent = "Enter a valid email.";
+          return;
+        }
 
-  try {
-    const res = await fetch(
-      "https://aesncvmhlgmdnmhwablm.supabase.co/functions/v1/waitlist",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email })
-      }
-    );
+        button.disabled = true;
+        button.textContent = "Joining…";
 
-    if (!res.ok) {
-      throw new Error("Request failed");
+        try {
+          const { error } = await sb.from("waitlist").insert([{ email }]);
+
+          if (error) {
+            console.error("Supabase insert error:", error);
+
+            if (error.code === "23505") {
+              msg.style.display = "block";
+              msg.style.color = "rgba(140,255,210,.72)";
+              msg.textContent = "You're already on the waitlist.";
+            } else if (
+              String(error.message || "").toLowerCase().includes("row-level security")
+            ) {
+              msg.style.display = "block";
+              msg.style.color = "rgba(255,120,120,.85)";
+              msg.textContent =
+                "Backend blocked the insert (RLS). Add an INSERT policy for waitlist.";
+            } else if (
+              String(error.message || "").toLowerCase().includes("relation") &&
+              String(error.message || "").toLowerCase().includes("does not exist")
+            ) {
+              msg.style.display = "block";
+              msg.style.color = "rgba(255,120,120,.85)";
+              msg.textContent =
+                "Table 'waitlist' not found in Supabase. Create it first.";
+            } else {
+              msg.style.display = "block";
+              msg.style.color = "rgba(255,120,120,.85)";
+              msg.textContent = error.message || "Something went wrong. Try again.";
+            }
+            return;
+          }
+
+          msg.style.display = "block";
+          msg.style.color = "rgba(140,255,210,.72)";
+          msg.textContent = "You're in. We'll email you when early access opens.";
+          form.reset();
+        } catch (err) {
+          console.error("Waitlist submit error:", err);
+          msg.style.display = "block";
+          msg.style.color = "rgba(255,120,120,.85)";
+          msg.textContent = "Something went wrong. Try again.";
+        } finally {
+          button.disabled = false;
+          button.textContent = "Join Early Access";
+        }
+      });
+    } else {
+      console.warn("Waitlist form elements not found (waitlistForm/formMsg).");
     }
 
-    msg.style.display = "block";
-    msg.style.color = "rgba(140,255,210,.72)";
-    msg.textContent = "You're in. We'll email you when early access opens.";
-    form.reset();
+    // -----------------------------
+    // Footer year (NULL SAFE)
+    // -----------------------------
+    const yearEl = document.getElementById("year");
+    if (yearEl) yearEl.textContent = String(new Date().getFullYear());
+  });
+</script>
 
-  } catch (err) {
-    msg.style.display = "block";
-    msg.style.color = "rgba(255,120,120,.85)";
-    msg.textContent = "Something went wrong. Try again.";
-  } finally {
-    button.disabled = false;
-    button.textContent = "Join Early Access";
-  }
-});
-
-
-
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
