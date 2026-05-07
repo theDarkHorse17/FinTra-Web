@@ -1,7 +1,13 @@
 {
-  "buildCommand": "",
-  "installCommand": "",
-  "outputDirectory": "sites/landingpage",
-  "cleanUrls": true,
-  "trailingSlash": false
+  "version": 2,
+  "builds": [
+    { "src": "sites/landingpage/index.html", "use": "@vercel/static" },
+    { "src": "sites/pitchsite/index.html", "use": "@vercel/static" },
+    { "src": "sites/pitchsite/assets/**", "use": "@vercel/static" }
+  ],
+  "routes": [
+    { "src": "^/$", "dest": "/sites/landingpage/index.html" },
+    { "src": "^/pitch$", "dest": "/sites/pitchsite/index.html" },
+    { "src": "^/assets/(.*)", "dest": "/sites/pitchsite/assets/$1" }
+  ]
 }
