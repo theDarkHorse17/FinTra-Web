@@ -1,0 +1,7 @@
+{
+  "buildCommand": "",
+  "installCommand": "",
+  "outputDirectory": "sites/landingpage",
+  "cleanUrls": true,
+  "trailingSlash": false
+}
